@@ -5,6 +5,7 @@ import CreateWorkshop from './CreateWorkshop';
 import WorkshopListItem from './WorkshopListItem';
 
 export function Workshops(props) {
+
 	const workshops = props.workshops
 		.map((workshop, index) => {
 			const studentsAttending = props.roster

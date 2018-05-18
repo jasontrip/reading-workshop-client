@@ -1,7 +1,8 @@
 .add-student {
 	font-size: 14px;
 	text-align: left;
-	padding: 20px;
+	vertical-align: center;
+	height: 60px;
 	text-decoration: underline;
 }
 
@@ -10,6 +11,7 @@
 	border: 0;
 	width: 90px;
 	padding: 10px 5px 10px 5px;
+	margin-top: 15px;
 
 }
 input:focus {
@@ -25,4 +27,7 @@ input:focus {
 	padding: 10px;
 	margin: 0 5px 0 5px;
 	background-color: #bbb;
+}
+.add-student-text {
+	padding: 25px 0 0 15px;
 }

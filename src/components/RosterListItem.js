@@ -5,11 +5,11 @@ import RemoveRosterListItem from './RemoveRosterListItem';
 
 export default function RosterListItem(props) {
 
-	const {firstName, lastName} = props;
+	const {id, firstName, lastName} = props;
 
 	return (
 		<div className="roster-list-item">
-			<RemoveRosterListItem />
+			<RemoveRosterListItem id={id} />
 			{firstName} {lastName}
 		</div>
 	)

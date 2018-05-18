@@ -1,7 +1,10 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import './AddStudent.css'
 
-export default class AddStudent extends React.Component {
+import {addStudent} from '../actions';
+
+export class AddStudent extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -15,7 +18,10 @@ export default class AddStudent extends React.Component {
 	}
 	onSubmit(event) {
 		event.preventDefault();
-
+		this.setEditing(false);
+		this.props.dispatch(
+			addStudent(this.firstName.value, 
+									this.lastName.value));
 	}
 
 	render() {
@@ -23,14 +29,16 @@ export default class AddStudent extends React.Component {
 			return (
 				<div className="add-student"
 					onClick={() => this.setEditing(true)}>
-					add a student...
+					<div className="add-student-text">
+						add a student...
+					</div>
 				</div>
 			);
 		}
 
 		return (
 			<div className="add-student">
-				<form onSubmit={(e) => this.onSubmit(e)}>
+				<form onSubmit={e => this.onSubmit(e)}>
 					<input
 						type="text"
 						placeholder="first name"
@@ -52,5 +60,6 @@ export default class AddStudent extends React.Component {
 			</div>
 		);
 	}
-
 }
+
+export default connect()(AddStudent);

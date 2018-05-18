@@ -1,15 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {dummyState} from '../dummy-data';
 import RosterListItem from './RosterListItem';
 import AddStudent from './AddStudent';
 
 export function Roster(props) {
-	const {roster} = dummyState;
+	const {roster} = props;
 
 	const rosterList = roster.map((student, index) => (
 		<RosterListItem
 			key={index}
+			id={student._id}
 			firstName={student.firstName}
 			lastName= {student.lastName}
 		/>

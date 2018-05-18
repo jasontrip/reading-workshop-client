@@ -9,9 +9,9 @@ export default function WorkshopListItem(props) {
 	}
 
 	const studentList = students.map((student, index) => (
-		<span key={index}>
-			{index?', ':''} {student.firstName} {student.lastName}
-		</span>
+			<span key={index}>
+				{index?', ':''} {student.firstName} {student.lastName}
+			</span>
 	));
 
 	return (

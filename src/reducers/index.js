@@ -1,4 +1,4 @@
-
+import {ADD_STUDENT, REMOVE_STUDENT} from '../actions';
 
 const initialState = {
 	workshops:
@@ -47,7 +47,25 @@ const initialState = {
 }
 
 export const readingWorkshopReducer = (state=initialState, action) => {
-
+	if (action.type === ADD_STUDENT) {
+		const newStudent = {
+			_id: (state.roster.length + 1),
+			firstName: action.firstName,
+			lastName: action.lastName
+		}
+		return Object.assign({}, state,
+			{
+				roster: [...state.roster, newStudent]
+			}
+		);
+	} else if (action.type === REMOVE_STUDENT) {
+		return Object.assign({}, state,
+			{
+				roster: state.roster
+					.filter(student => student._id !== action.id)
+			}
+		);
+	}
 	return state;
 }
 

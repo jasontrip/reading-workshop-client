@@ -11,13 +11,17 @@ export default function LandingPage(props) {
 			</header>
 			<section className="section">
 				<p>
-					You read with small groups of learners every day, but recording that information is hard! Readers Workshop will help!
+					You read with small groups of learners every day, 
+					but recording that information is hard! Readers Workshop will help!
 				</p>
 			</section>
 			<section className="section">
 				[screenshot here]
 				<p>
-					Create a workshop session and record session notes, what book you are working on, and what pages you covered. Add students to the session from your roster, and take notes for each student.
+					Create a workshop session and record session notes, 
+					what book you are working on, and what pages you covered. 
+					Add students to the session from your roster, 
+					and take notes for each student.
 				</p>
 			</section>
 			<section className="section">
