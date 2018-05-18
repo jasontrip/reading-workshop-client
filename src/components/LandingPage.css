@@ -1,0 +1,13 @@
+.landing-header {
+	padding: 60px 10px 40px 10px;
+}
+
+.section {
+  min-height: 200px;
+  padding: 30px 15px;
+  background-color: #bbb;
+}
+
+.section:nth-child(even) {
+  background-color: #ddd;
+}

@@ -1,0 +1,25 @@
+.workshop-form {
+	font-size: 14px;
+  padding: 10px 15px;
+  background-color: #bbb;
+  text-align: left;
+}
+
+.workshop-form input {
+	margin-left: 5px;
+}
+.workshop-form .book input {
+	width: 50px;
+}
+.workshop-form .pages {
+	margin-left: 5px;
+}
+.workshop-form .notes * {
+  display: block;
+}
+.workshop-form .notes textarea {
+  width: 100%;
+}
+.workshop-form .book {
+  margin: 10px 0 10px 0;
+}

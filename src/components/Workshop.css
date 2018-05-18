@@ -1,0 +1,16 @@
+.workshop-screen header {
+	text-align: center;
+}
+.workshop-screen button {
+  border: 0;
+  background-color: #bbb;
+  padding: 5px;
+  margin: 0 5px 10px 5px;
+}
+
+.add-student-to-workshop {
+	font-size: 14px;
+	text-decoration: underline;
+	height: 40px;
+	padding: 10px;
+}
