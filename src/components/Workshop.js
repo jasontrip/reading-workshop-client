@@ -4,7 +4,6 @@ import './Workshop.css';
 import WorkshopForm from './WorkshopForm';
 
 export default function Workshop(props) {
-	const {students} = props;
 
 	return (
 		<div className="workshop-screen">
