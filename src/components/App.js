@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-import Navbar from './Navbar';
+import MenuAppBar from './MenuAppBar';
 import LandingPage from './LandingPage';
 import Workshops from './Workshops';
 import Workshop from './Workshop';
@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
         <div className="App">
-          <Navbar />
+          <MenuAppBar />
           <main>
             <Router>
               <div>
