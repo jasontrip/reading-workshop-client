@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import RosterListItem from './RosterListItem';
 import AddStudent from './AddStudent';
+import MenuAppBar from './MenuAppBar';
+
 
 export function Roster(props) {
 	const {roster} = props;
@@ -16,16 +18,19 @@ export function Roster(props) {
 	));
 
 	return (
-		<header>
-			<h1>Roster</h1>
-			<AddStudent />
-			{rosterList}
-		</header>
+		<div>
+			<MenuAppBar pageTitle="Roster" />
+			<header>
+				<h1>Roster</h1>
+				<AddStudent />
+				{rosterList}
+			</header>
+		</div>
 	);
 }
 
 const mapStateToProps = state => ({
-	roster: state.roster
+	roster: state.readingWorkshop.roster
 });
 
 export default connect(mapStateToProps)(Roster);

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import './Workshops.css';
 import CreateWorkshop from './CreateWorkshop';
 import WorkshopListItem from './WorkshopListItem';
+import MenuAppBar from './MenuAppBar';
 
 export function Workshops(props) {
 
@@ -27,6 +28,7 @@ export function Workshops(props) {
 
 	return (
 		<div>
+			<MenuAppBar pageTitle="Workshops" />
 			<header>
 				<h1>Workshops</h1>
 			</header>
@@ -37,8 +39,8 @@ export function Workshops(props) {
 }
 
 const mapStateToProps = state => ({
-	workshops: state.workshops,
-	roster: state.roster
+	workshops: state.readingWorkshop.workshops,
+	roster: state.readingWorkshop.roster
 });
 
 export default connect(mapStateToProps)(Workshops);

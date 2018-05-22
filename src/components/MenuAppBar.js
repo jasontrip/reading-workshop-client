@@ -1,6 +1,8 @@
 import React from 'react';
 import './MenuAppBar.css';
 
+import {Link} from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -59,10 +61,10 @@ class MenuAppBar extends React.Component {
           onClick={this.toggleDrawer(false)}>
           <div className="drawer" onClick={this.toggleDrawer(false)}>
             <MenuItem>
-              <a href="/Workshops">Workshops</a>
+              <Link to="/Workshops">Workshops</Link>
             </MenuItem>
             <MenuItem>
-              <a href="/Roster">Roster</a>
+              <Link to="/Roster">Roster</Link>
             </MenuItem>
           </div>
         </Drawer>
@@ -79,7 +81,7 @@ class MenuAppBar extends React.Component {
               variant="title" 
               color="inherit"
               className={classes.flex}>
-              {this.state.pageTitle}
+              {this.props.pageTitle}
             </Typography>
             {auth && (
               <div>

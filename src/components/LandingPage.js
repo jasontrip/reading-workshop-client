@@ -32,6 +32,7 @@ export default function LandingPage(props) {
 			</section>
 			<section className="section">
 				Create an account and start reading!
+				
 				<CreateAccountForm />
 			</section>
 		</div>
