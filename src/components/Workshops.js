@@ -1,39 +1,47 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import './Workshops.css';
-import CreateWorkshop from './CreateWorkshop';
-import WorkshopListItem from './WorkshopListItem';
 import MenuAppBar from './MenuAppBar';
+
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
 
 export function Workshops(props) {
 
-	const workshops = props.workshops
+	const workshopList = props.workshops
 		.map((workshop, index) => {
-			const studentsAttending = props.roster
-				.filter(student => {
-					return workshop.students.includes(student._id)
-				});
-
+			const studentList = workshop.students.map((student, index) => {
+				return `${index?', ':''} ${student.firstName}`
+			});
 			return (
-				<WorkshopListItem
-					key={index}
-					id={workshop._id}
-					date={workshop.date}
-					book={workshop.book}
-					pages={workshop.pages}
-					students={studentsAttending}
-				/>
+				<div key={index}>
+					<ListItem
+						button
+						component={Link}
+						to={`/workshops/${workshop.sessionNumber}`}>
+						<ListItemText
+							primary={`${workshop.date} ${workshop.book} ${workshop.pages}`}
+							secondary={studentList}
+						/>
+					</ListItem>
+					<Divider />
+				</div>
 			)
 		});
 
 	return (
 		<div>
 			<MenuAppBar pageTitle="Workshops" />
-			<header>
-				<h1>Workshops</h1>
-			</header>
-			<CreateWorkshop />
-			{workshops}
+			<List>
+				<ListItem button>
+					<ListItemText primary="Create a new session..." />
+				</ListItem>
+				<Divider />
+				{workshopList}
+			</List>
 		</div>
 	);
 }

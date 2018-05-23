@@ -1,26 +1,51 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import './Workshop.css';
 
 import WorkshopForm from './WorkshopForm';
+import Dialog from '@material-ui/core/Dialog';
 
-export default function Workshop(props) {
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+
+
+export function Workshop(props) {
+	const {sessionNumber} = props.match.params;
+	const currentWorkshop = props.workshops
+		.find(workshop => workshop.sessionNumber === parseInt(sessionNumber, 10));
+
+	const studentListItems = currentWorkshop.students.map( (student, index) => (
+		<div key={index}>
+			<ListItem button >
+				<ListItemText primary={`${student.firstName} ${student.lastName}`} />
+			</ListItem>
+			<Divider />
+		</div>
+	));
 
 	return (
-		<div className="workshop-screen">
-			<header>
-				<h1>Workshop</h1>
-				<button>Save</button>
-				<button>Delete</button>
-			</header>
-
-			<WorkshopForm />
-
-			<div className="add-student-to-workshop">
-				add a student...
+		<Dialog
+			fullScreen
+			open={true}
+		>
+			<div>
+				<WorkshopForm />
+				<List>
+					<ListItem button >
+						<ListItemText primary="add a student..." />
+					</ListItem>
+					<Divider />
+					{studentListItems}
+				</List>
 			</div>
-			<div className="student">Theo Johnson</div>
-			<div className="student">Julissa Meyer</div>
-			<div className="student">Jackie Appleseed</div>
-		</div>
+		</Dialog>
 	)
 }
+
+const mapStateToProps = state => ({
+	workshops: state.readingWorkshop.workshops
+});
+
+export default connect(mapStateToProps)(Workshop);

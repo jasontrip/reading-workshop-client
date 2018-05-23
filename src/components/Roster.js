@@ -20,11 +20,8 @@ export function Roster(props) {
 	return (
 		<div>
 			<MenuAppBar pageTitle="Roster" />
-			<header>
-				<h1>Roster</h1>
-				<AddStudent />
-				{rosterList}
-			</header>
+			<AddStudent />
+			{rosterList}
 		</div>
 	);
 }
