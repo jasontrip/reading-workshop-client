@@ -21,7 +21,8 @@ export function Workshops(props) {
 					<ListItem
 						button
 						component={Link}
-						to={`/workshops/${workshop.sessionNumber}`}>
+						to={`/workshops/${workshop.sessionNumber}`}
+					>
 						<ListItemText
 							primary={`${workshop.date} ${workshop.book} ${workshop.pages}`}
 							secondary={studentList}

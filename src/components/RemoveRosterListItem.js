@@ -7,6 +7,7 @@ import {removeStudent} from '../actions';
 export function RemoveRosterListItem(props) {
 
 	const onClick = id => {
+		console.log(id)
 		props.dispatch(removeStudent(id));
 	}
 

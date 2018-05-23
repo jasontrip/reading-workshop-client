@@ -6,7 +6,7 @@ const initialState = {
 		{
 			_id: 1234,
 			sessionNumber: 1,
-			date: '5/16/2018',
+			date: '2018-05-22',
 			book: 'The Pearl',
 			pages: '5-10',
 			notes: 'This session was ok. There were some distractions.',
@@ -18,7 +18,7 @@ const initialState = {
 		{
 			_id: 1235,
 			sessionNumber: 2,
-			date: '5/26/2018',
+			date: '2018-05-26',
 		 	book: 'Tale of Despereax',
 		 	pages: '1-20',
 		 	notes: 'This session was excellent.',
@@ -30,7 +30,7 @@ const initialState = {
 		{
 			_id: 1236,
 			sessionNumber: 3,
-			date: '5/21/2018',
+			date: '2018-05-21',
 		 	book: 'The Pearl',
 		 	pages: '15-20',
 		 	notes: 'This session was better.',
@@ -42,7 +42,7 @@ const initialState = {
 		{
 			_id: 1237,
 			sessionNumber: 4,
-			date: '5/26/2018',
+			date: '2018-05-15',
 		 	book: 'The Pearl',
 		 	pages: '20-25',
 		 	notes: 'This session was excellent.',

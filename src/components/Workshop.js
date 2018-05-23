@@ -31,7 +31,7 @@ export function Workshop(props) {
 			open={true}
 		>
 			<div>
-				<WorkshopForm />
+				<WorkshopForm workshop={currentWorkshop} history={props.history} />
 				<List>
 					<ListItem button >
 						<ListItemText primary="add a student..." />

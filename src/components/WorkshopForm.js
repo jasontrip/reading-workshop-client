@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {reduxForm, Field} from 'redux-form';
 import {required, nonEmpty} from '../validators';
 import DialogAppBar from './DialogAppBar';
@@ -14,7 +15,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 130,
+    width: 150,
   },
   notesField: {
   	marginLeft: theme.spacing.unit,
@@ -38,12 +39,12 @@ export function WorkshopForm(props) {
 					onSubmit={handleSubmit(onSubmit)}
 					pristine={pristine}
 					submitting={submitting}
-					valid={valid} />
+					valid={valid}
+					history={props.history} />
 				<Field
 					name="date"
 					label="date"
 					type="date"
-					value="2017-05-24"
 					className={classes.textField}
 					component={TextField}
 					InputLabelProps={{
@@ -52,14 +53,14 @@ export function WorkshopForm(props) {
 					validate={[required, nonEmpty]} />
 				<div className="book">
 					<Field
-						name="bookName"
+						name="book"
 						label="book"
 						type="text"
 						className={classes.textField}
 						component={TextField}
 						validate={[required, nonEmpty]} />
 					<Field
-						name="bookPagesRead"
+						name="pages"
 						label="pages"
 						type="text"
 						className={classes.textField}
@@ -80,6 +81,26 @@ export function WorkshopForm(props) {
 	)
 }
 
-export default reduxForm({
-	form: 'workshopForm'
-})(withStyles(styles)(WorkshopForm));
+const mapStateToProps = (state, ownProps) => {
+		return {
+			initialValues: {
+				date: ownProps.workshop.date,
+				book: ownProps.workshop.book,
+				pages: ownProps.workshop.pages,
+				notes: ownProps.workshop.notes
+			}
+		}
+};
+
+
+export default connect(mapStateToProps)(
+	reduxForm({form: 'workshopForm'})(
+		withStyles(styles)(WorkshopForm)
+	)
+);
+
+
+
+
+
+

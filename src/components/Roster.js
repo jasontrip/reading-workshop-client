@@ -1,27 +1,39 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import RosterListItem from './RosterListItem';
 import AddStudent from './AddStudent';
+import RemoveRosterListItem from './RemoveRosterListItem';
 import MenuAppBar from './MenuAppBar';
 
+import {List} from '@material-ui/core/';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
 
 export function Roster(props) {
 	const {roster} = props;
 
-	const rosterList = roster.map((student, index) => (
-		<RosterListItem
-			key={index}
-			id={student._id}
-			firstName={student.firstName}
-			lastName= {student.lastName}
-		/>
+	const studentList = roster.map((student, index) => (
+		<div key={index}>
+			<ListItem button>
+				<RemoveRosterListItem id={student._id} />
+				<ListItemText
+					primary={`${student.firstName} ${student.lastName}`}
+				/>
+			</ListItem>
+			<Divider />
+		</div>
 	));
 
 	return (
 		<div>
 			<MenuAppBar pageTitle="Roster" />
-			<AddStudent />
-			{rosterList}
+			<List>
+				<ListItem>
+					<AddStudent />
+				</ListItem>
+				<Divider />
+				{studentList}
+			</List>
 		</div>
 	);
 }
