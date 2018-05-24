@@ -30,6 +30,7 @@ function onSubmit(values) {
 
 export function WorkshopForm(props) {
 	const {classes, handleSubmit, pristine, submitting, valid} = props;
+	console.log(props);
 
 	return (
 		<div className="workshop-form">
@@ -39,8 +40,7 @@ export function WorkshopForm(props) {
 					onSubmit={handleSubmit(onSubmit)}
 					pristine={pristine}
 					submitting={submitting}
-					valid={valid}
-					history={props.history} />
+					valid={valid} />
 				<Field
 					name="date"
 					label="date"

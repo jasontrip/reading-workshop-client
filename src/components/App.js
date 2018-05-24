@@ -10,8 +10,8 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div className="App">
+      <div className="App">
+        <Router>
           <main>
               <div>
                 <Route exact path="/" component={LandingPage} />
@@ -20,8 +20,8 @@ class App extends Component {
                 <Route exact path="/roster" component={Roster} />
               </div>
           </main>
-        </div>
-      </Router>
+        </Router>
+      </div>
     );
   }
 }
