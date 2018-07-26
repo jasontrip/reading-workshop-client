@@ -4,6 +4,8 @@ import './MenuAppBar.css';
 import {Link} from 'react-router-dom';
 
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,8 +15,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-
+import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
+
+import LoginOrRegisterDialog from './LoginOrRegisterDialog';
+
+import { logOut, toggleLoginOrRegisterDialogOpen } from '../actions';
 
 const styles = {
   root: {
@@ -32,26 +38,37 @@ const styles = {
 class MenuAppBar extends React.Component {
   state = {
     anchorEl: null,
-    drawerOpen: false
+    drawerOpen: false,
+  };
+
+  logIn = event => {
+    this.props.dispatch(toggleLoginOrRegisterDialogOpen(true));
   };
 
   handleMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
-  handleClose = () => {
+  handleLogout = () => {
     this.setState({ anchorEl: null });
+    this.props.dispatch(logOut());
+    toggleLoginOrRegisterDialogOpen(false);
   };
 
   toggleDrawer = (drawerOpen) => () => {
     this.setState ({
       drawerOpen
     });
+    console.log(this.props);
+  }
+
+  handleCloseLoginOrRegisterDialog = () => {
+    this.props.dispatch(toggleLoginOrRegisterDialogOpen(false));
   }
 
   render() {
-    const { classes } = this.props;
-    const { auth, anchorEl } = this.state;
+    const { classes, user, showLoginOrRegisterDialog } = this.props;
+    const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
     return (
@@ -69,6 +86,10 @@ class MenuAppBar extends React.Component {
           </div>
         </Drawer>
 
+        <LoginOrRegisterDialog
+          open={showLoginOrRegisterDialog}
+          onClose={this.handleCloseLoginOrRegisterDialog}
+        />
 
         <AppBar position="static">
           <Toolbar>
@@ -83,7 +104,10 @@ class MenuAppBar extends React.Component {
               className={classes.flex}>
               {this.props.pageTitle}
             </Typography>
-            {auth && (
+            {!user && (
+              <Button color="inherit" onClick={this.logIn}>Login</Button>
+            )}
+            {user && (
               <div>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
@@ -107,7 +131,7 @@ class MenuAppBar extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleClose}>Log out</MenuItem>
+                  <MenuItem onClick={this.handleLogout}>Log out</MenuItem>
                 </Menu>
               </div>
             )}
@@ -118,8 +142,16 @@ class MenuAppBar extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  user: state.readingWorkshop.user,
+  showLoginOrRegisterDialog: state.readingWorkshop.showLoginOrRegisterDialog
+});
+
 MenuAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MenuAppBar);
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps)
+)(MenuAppBar);

@@ -1,45 +1,55 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
-import './CreateAccountForm.css';
+import './UsernameAndPasswordForm.css';
 
 import Button from '@material-ui/core/Button';
-import {required, nonEmpty, email, noWhitespace} from '../validators';
 
 import TextField from './TextField';
 
-export function CreateAccountForm(props) {
+export function UsernameAndPasswordForm(props) {
 	const {handleSubmit, pristine, submitting, valid} = props;
 
 	const onSubmit = (values) => {
-		console.log(values);
+		const { email, password } = values;
+
+		return props.onSubmit(email, password);
 	}
 
 
 	return (
 		<form
-			onSubmit={handleSubmit(onSubmit)}>
+			onSubmit={handleSubmit(onSubmit)}
+			open={ props.open }
+		>
 			<div>
 				<Field
+					className="email"
 					name="email"
 					label="email"
 					component={TextField}
-					validate={[required, nonEmpty, email, noWhitespace]}/>
+					validate={ props.validateUsername }
+					disabled={ submitting }
+				/>
 			</div>
 			<div>
 				<Field
+					className="password"
 					name="password"
 					label="password"
 					type="text"
 					component={TextField}
-					validate={[required, nonEmpty, noWhitespace]}
+					validate={ props.validatePassword }
+					disabled={ submitting }
 				/>
 			</div>
+			<br />
 			<div>
 				<Button
+					className="button"
 					type="submit"
 					variant="raised"
 					disabled={pristine || submitting || !valid} >
-        	Sign up!
+        	{ props.buttonText }
       	</Button>
 			</div>
 		</form>
@@ -47,5 +57,5 @@ export function CreateAccountForm(props) {
 }
 
 export default reduxForm({
-	form: 'createAccount'
-})(CreateAccountForm);
+	form: 'UsernameAndPasswordForm'
+})(UsernameAndPasswordForm);

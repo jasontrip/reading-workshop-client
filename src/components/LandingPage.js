@@ -1,11 +1,11 @@
 import React from 'react';
+import MenuAppBar from './MenuAppBar'
 import './LandingPage.css';
-
-import CreateAccountForm from './CreateAccountForm';
 
 export default function LandingPage(props) {
 	return (
 		<div>
+			<MenuAppBar pageTitle="Readers Workshop" />
 			<header>
 				<h1 className="landing-header">Readers Workshop</h1>
 			</header>
@@ -32,8 +32,6 @@ export default function LandingPage(props) {
 			</section>
 			<section className="section">
 				Create an account and start reading!
-				
-				<CreateAccountForm />
 			</section>
 		</div>
 	);

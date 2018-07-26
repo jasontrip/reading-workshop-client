@@ -1,66 +1,12 @@
-import {ADD_STUDENT, REMOVE_STUDENT} from '../actions';
+import { ADD_STUDENT,
+				 REMOVE_STUDENT,
+				 FETCH_LOGIN_SUCCESS,
+				 LOG_OUT,
+				 TOGGLE_LOGIN_OR_REGISTER_DIALOG_OPEN
+				} from '../actions';
 
 const initialState = {
-	workshops:
-	[
-		{
-			_id: 1234,
-			sessionNumber: 1,
-			date: '2018-05-22',
-			book: 'The Pearl',
-			pages: '5-10',
-			notes: 'This session was ok. There were some distractions.',
-			students: [
-				{_id: 1, firstName: 'Theo', lastName: 'Williams'},
-				{_id: 3, firstName: 'Vanessa', lastName: 'Skywalker'}
-			]
-		},
-		{
-			_id: 1235,
-			sessionNumber: 2,
-			date: '2018-05-26',
-		 	book: 'Tale of Despereax',
-		 	pages: '1-20',
-		 	notes: 'This session was excellent.',
-		 	students: [
-			 	{_id: 4, firstName: 'Jason', lastName: 'Johnson'},
-				{_id: 5, firstName: 'Jennifer', lastName: 'Jackson'}
-			]
-		},
-		{
-			_id: 1236,
-			sessionNumber: 3,
-			date: '2018-05-21',
-		 	book: 'The Pearl',
-		 	pages: '15-20',
-		 	notes: 'This session was better.',
-			students: [
-				{_id: 1, firstName: 'Theo', lastName: 'Williams'},
-				{_id: 3, firstName: 'Vanessa', lastName: 'Skywalker'}
-			]
-		},
-		{
-			_id: 1237,
-			sessionNumber: 4,
-			date: '2018-05-15',
-		 	book: 'The Pearl',
-		 	pages: '20-25',
-		 	notes: 'This session was excellent.',
-		 	students: [
-		 		{_id: 2, firstName: 'Neo', lastName: 'Smith'},
-		 		{_id: 4, firstName: 'Jason', lastName: 'Johnson'},
-				{_id: 5, firstName: 'Jennifer', lastName: 'Jackson'}
-		 	]
-		}
-	],
-	roster:
-	[
-		{_id: 1, firstName: 'Theo', lastName: 'Williams'},
-		{_id: 2, firstName: 'Neo', lastName: 'Smith'},
-		{_id: 3, firstName: 'Vanessa', lastName: 'Skywalker'},
-		{_id: 4, firstName: 'Jason', lastName: 'Johnson'},
-		{_id: 5, firstName: 'Jennifer', lastName: 'Jackson'}
-	]
+	showLoginOrRegisterDialog: false
 }
 
 export const readingWorkshopReducer = (state=initialState, action) => {
@@ -82,6 +28,22 @@ export const readingWorkshopReducer = (state=initialState, action) => {
 					.filter(student => student._id !== action.id)
 			}
 		);
+	} else if (action.type === TOGGLE_LOGIN_OR_REGISTER_DIALOG_OPEN) {
+		return Object.assign({}, state,
+			{
+				showLoginOrRegisterDialog: action.open
+			}
+		);
+	} else if (action.type === FETCH_LOGIN_SUCCESS) {
+		return Object.assign({}, state,
+		{
+			user: action.user
+		});
+	} else if (action.type === LOG_OUT) {
+		return Object.assign({}, state,
+		{
+			user: null
+		});
 	}
 	return state;
 }
