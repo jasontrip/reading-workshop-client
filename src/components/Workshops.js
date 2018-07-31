@@ -48,8 +48,8 @@ export function Workshops(props) {
 }
 
 const mapStateToProps = state => ({
-	workshops: state.readingWorkshop.workshops,
-	roster: state.readingWorkshop.roster
+	workshops: state.readingWorkshop.user.workshops,
+	roster: state.readingWorkshop.user.roster
 });
 
 export default connect(mapStateToProps)(Workshops);

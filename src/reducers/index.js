@@ -1,12 +1,13 @@
 import { ADD_STUDENT,
 				 REMOVE_STUDENT,
-				 FETCH_LOGIN_SUCCESS,
-				 LOG_OUT,
+				 SET_USER_DATA,
+				 CLEAR_USER_DATA,
 				 TOGGLE_LOGIN_OR_REGISTER_DIALOG_OPEN
 				} from '../actions';
 
 const initialState = {
-	showLoginOrRegisterDialog: false
+	showLoginOrRegisterDialog: false,
+	user: null
 }
 
 export const readingWorkshopReducer = (state=initialState, action) => {
@@ -34,16 +35,18 @@ export const readingWorkshopReducer = (state=initialState, action) => {
 				showLoginOrRegisterDialog: action.open
 			}
 		);
-	} else if (action.type === FETCH_LOGIN_SUCCESS) {
+	} else if (action.type === SET_USER_DATA) {
 		return Object.assign({}, state,
-		{
-			user: action.user
-		});
-	} else if (action.type === LOG_OUT) {
+			{
+				user: action.user
+			}
+		);
+	} else if (action.type === CLEAR_USER_DATA) {
 		return Object.assign({}, state,
-		{
-			user: null
-		});
+			{
+				user: null
+			}
+		);
 	}
 	return state;
 }

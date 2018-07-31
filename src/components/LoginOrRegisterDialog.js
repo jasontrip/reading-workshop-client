@@ -10,7 +10,8 @@ import Typography from '@material-ui/core/Typography';
 
 import UsernameAndPasswordForm from './UsernameAndPasswordForm';
 import {required, nonEmpty, email, noWhitespace} from '../validators';
-import { logInUser, toggleLoginOrRegisterDialogOpen } from '../actions';
+import { logInUser } from '../actions/auth';
+
 
 function TabContainer(props) {
   return (
@@ -31,19 +32,14 @@ const styles = {
   },
 };
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
 class LoginOrRegisterDialog extends React.Component {
   state = {
     tab: 0,
   };
 
   logIn = (username, password) => {
-
-    return sleep(1000)
-      .then(() => this.props.dispatch(logInUser(username, password)))
-      .then(() => this.props.dispatch(toggleLoginOrRegisterDialogOpen(false)));
-  }
+    return this.props.dispatch(logInUser(username, password));
+  };
 
   register = (username, password) => {
     console.log('register');
@@ -107,4 +103,8 @@ LoginOrRegisterDialog.propTypes = {
   selectedValue: PropTypes.string,
 };
 
-export default connect()(withStyles(styles)(LoginOrRegisterDialog));
+const mapStateToProps = state => ({
+  error: state.readingWorkshop.error
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(LoginOrRegisterDialog));

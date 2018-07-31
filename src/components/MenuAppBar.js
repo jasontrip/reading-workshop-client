@@ -20,7 +20,8 @@ import Drawer from '@material-ui/core/Drawer';
 
 import LoginOrRegisterDialog from './LoginOrRegisterDialog';
 
-import { logOut, toggleLoginOrRegisterDialogOpen } from '../actions';
+import { clearAuthToken } from '../local-storage';
+import { toggleLoginOrRegisterDialogOpen, clearUserData } from '../actions';
 
 const styles = {
   root: {
@@ -50,16 +51,15 @@ class MenuAppBar extends React.Component {
   };
 
   handleLogout = () => {
+    this.props.dispatch(clearUserData());
     this.setState({ anchorEl: null });
-    this.props.dispatch(logOut());
-    toggleLoginOrRegisterDialogOpen(false);
+    clearAuthToken();
   };
 
   toggleDrawer = (drawerOpen) => () => {
     this.setState ({
       drawerOpen
     });
-    console.log(this.props);
   }
 
   handleCloseLoginOrRegisterDialog = () => {

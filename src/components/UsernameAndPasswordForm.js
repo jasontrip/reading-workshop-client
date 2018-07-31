@@ -48,7 +48,7 @@ export function UsernameAndPasswordForm(props) {
 					className="button"
 					type="submit"
 					variant="raised"
-					disabled={pristine || submitting || !valid} >
+					disabled={ pristine || submitting || !valid } >
         	{ props.buttonText }
       	</Button>
 			</div>
