@@ -3,31 +3,36 @@ import { SubmissionError } from 'redux-form';
 import { setUserData, toggleLoginOrRegisterDialogOpen } from './';
 import { saveAuthToken, clearAuthToken } from '../local-storage';
 
-export const logInUser = (username, password) => dispatch => {
-	return fetch(BASE_URL + '/auth/login',
-		{ 
-		  method: 'POST',
-		  body: JSON.stringify( { username, password }),
-		  headers:{ 'Content-Type': 'application/json' },
-		}
-	)
-	.then(res => {
-		if (!res.ok) {
-			return Promise.reject(res.statusText);
-		}
-		return res.json();
-	})
-	.then(data => {
-		saveAuthToken(data.authToken);
-		dispatch(setUserData(data.user));
-		dispatch(toggleLoginOrRegisterDialogOpen(false));
-	})
-	.catch(err => {
-    throw new SubmissionError({
-      email: 'Athentication failed.',
-      _error: 'Login failed!'
+export const loginOrRegisterUser = (endpoint, user) => dispatch => {
+    const ambiguousLoginError = {
+        username: 'Username or password incorrect'
+    };
+    return fetch(BASE_URL + endpoint, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+        body: JSON.stringify(user)
+    })
+    .then(res => {
+        if (!res.ok) {
+            throw ambiguousLoginError;
+        }
+        return res.json();
+    })
+    .then(res => {
+        console.log(res);
+        if (!res.authToken) {
+            throw res;
+        }
+        saveAuthToken(res.authToken);
+        dispatch(setUserData(res.user));
+        dispatch(toggleLoginOrRegisterDialogOpen(false));
+    })
+    .catch(err => {
+        console.log(err);
+        throw new SubmissionError(err);
     });
-	});
 };
 
 export const refreshAuthToken = (authToken) => (dispatch) => {

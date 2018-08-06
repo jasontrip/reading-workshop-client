@@ -10,9 +10,9 @@ export function UsernameAndPasswordForm(props) {
 	const {handleSubmit, pristine, submitting, valid} = props;
 
 	const onSubmit = (values) => {
-		const { email, password } = values;
+		const { username, password } = values;
 
-		return props.onSubmit(email, password);
+		return props.onSubmit(username, password);
 	}
 
 
@@ -23,8 +23,8 @@ export function UsernameAndPasswordForm(props) {
 		>
 			<div>
 				<Field
-					className="email"
-					name="email"
+					className="username"
+					name="username"
 					label="email"
 					component={TextField}
 					validate={ props.validateUsername }

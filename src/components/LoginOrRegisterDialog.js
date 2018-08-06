@@ -10,8 +10,7 @@ import Typography from '@material-ui/core/Typography';
 
 import UsernameAndPasswordForm from './UsernameAndPasswordForm';
 import {required, nonEmpty, email, noWhitespace} from '../validators';
-import { logInUser } from '../actions/auth';
-
+import { loginOrRegisterUser } from '../actions/auth';
 
 function TabContainer(props) {
   return (
@@ -38,11 +37,11 @@ class LoginOrRegisterDialog extends React.Component {
   };
 
   logIn = (username, password) => {
-    return this.props.dispatch(logInUser(username, password));
+    return this.props.dispatch(loginOrRegisterUser('/auth/login', { username, password }));
   };
 
   register = (username, password) => {
-    console.log('register');
+    return this.props.dispatch(loginOrRegisterUser('/users', { username, password }));
   };
 
   handleChange = (event, value) => {
