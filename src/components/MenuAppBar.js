@@ -50,6 +50,10 @@ class MenuAppBar extends React.Component {
     this.setState({ anchorEl: event.currentTarget });
   };
 
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
   handleLogout = () => {
     this.props.dispatch(clearUserData());
     this.setState({ anchorEl: null });
