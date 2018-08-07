@@ -12,9 +12,12 @@ import Divider from '@material-ui/core/Divider';
 
 
 export function Workshop(props) {
-	const {sessionNumber} = props.match.params;
+	const { workshopId } = props.match.params;
 	const currentWorkshop = props.workshops
-		.find(workshop => workshop.sessionNumber === parseInt(sessionNumber, 10));
+		.find(workshop => {
+			console.log(workshop._id, workshopId);
+			return workshop._id === workshopId;
+		});
 
 	const studentListItems = currentWorkshop.students.map( (student, index) => (
 		<div key={index}>
@@ -45,7 +48,7 @@ export function Workshop(props) {
 }
 
 const mapStateToProps = state => ({
-	workshops: state.readingWorkshop.workshops
+	workshops: state.readingWorkshop.user.workshops
 });
 
 export default connect(mapStateToProps)(Workshop);

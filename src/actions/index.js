@@ -27,6 +27,16 @@ export const setUserData = (user) => ({
 	user
 });
 
+export const USER_DATA_REQUEST = 'USER_DATA_REQUEST';
+export const userDataRequest = () => ({
+	type: USER_DATA_REQUEST
+});
+
+export const USER_DATA_SUCCESS = 'USER_DATA_SUCCESS';
+export const userDataSucess = () => ({
+	type: USER_DATA_SUCCESS
+});
+
 export const CLEAR_USER_DATA = 'CLEAR_USER_DATA';
 export const clearUserData = (error) => ({
 	type: CLEAR_USER_DATA,
@@ -40,6 +50,7 @@ export const loginFail = (error) => ({
 });
 
 export const fetchUserData = (authToken) => dispatch => {
+	dispatch(userDataRequest());
 	const authToken = loadAuthToken();
 	return fetch(BASE_URL + '/users', {
 		method: 'GET',
@@ -55,5 +66,9 @@ export const fetchUserData = (authToken) => dispatch => {
 		})
 		.then((user) => {
 			dispatch(setUserData(user));
+			return new Promise((resolve, reject) => {
+      	setTimeout(resolve, 3000);
+      });
 		})
+		.then(() => dispatch(userDataSucess()));
 }

@@ -1,5 +1,7 @@
 import { ADD_STUDENT,
 				 REMOVE_STUDENT,
+				 USER_DATA_REQUEST,
+				 USER_DATA_SUCCESS,
 				 SET_USER_DATA,
 				 CLEAR_USER_DATA,
 				 TOGGLE_LOGIN_OR_REGISTER_DIALOG_OPEN
@@ -7,7 +9,8 @@ import { ADD_STUDENT,
 
 const initialState = {
 	showLoginOrRegisterDialog: false,
-	user: null
+	user: null,
+	loading: false
 }
 
 export const readingWorkshopReducer = (state=initialState, action) => {
@@ -39,6 +42,18 @@ export const readingWorkshopReducer = (state=initialState, action) => {
 		return Object.assign({}, state,
 			{
 				user: action.user
+			}
+		);
+	} else if (action.type === USER_DATA_REQUEST) {
+		return Object.assign({}, state,
+			{
+				loading: true
+			}
+		);
+	} else if (action.type === USER_DATA_SUCCESS) {
+		return Object.assign({}, state,
+			{
+				loading: false
 			}
 		);
 	} else if (action.type === CLEAR_USER_DATA) {

@@ -54,16 +54,16 @@ class LoginOrRegisterDialog extends React.Component {
 
 
   render() {
-    const { classes, onClose, selectedValue, ...other } = this.props;
+    const { classes, open, error } = this.props;
     const { tab } = this.state;
 
     return (
       <Dialog
         classes={{ paper: classes.dialog }}
-        open={ this.state.open }
+        open={ open }
         onClose={ this.handleClose }
         aria-labelledby="simple-dialog-title"
-        {...other}
+        error={ error }
       >
         <div>
           <Tabs value={ tab } onChange={this.handleChange} centered >

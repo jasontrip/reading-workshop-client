@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import './Workshops.css';
 import MenuAppBar from './MenuAppBar';
+import requiresLogin from './requires-login';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -21,7 +22,7 @@ export function Workshops(props) {
 					<ListItem
 						button
 						component={Link}
-						to={`/workshops/${workshop.sessionNumber}`}
+						to={`/workshops/${workshop._id}`}
 					>
 						<ListItemText
 							primary={`${workshop.date} ${workshop.book} ${workshop.pages}`}
@@ -52,4 +53,4 @@ const mapStateToProps = state => ({
 	roster: state.readingWorkshop.user.roster
 });
 
-export default connect(mapStateToProps)(Workshops);
+export default requiresLogin()(connect(mapStateToProps)(Workshops));
