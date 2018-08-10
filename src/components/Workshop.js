@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './Workshop.css';
 
+import compose from 'recompose/compose';
+import requiresLogin from './requires-login';
 import WorkshopForm from './WorkshopForm';
 import Dialog from '@material-ui/core/Dialog';
 
@@ -10,14 +12,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 
-
 export function Workshop(props) {
 	const { workshopId } = props.match.params;
-	const currentWorkshop = props.workshops
-		.find(workshop => {
-			console.log(workshop._id, workshopId);
-			return workshop._id === workshopId;
-		});
+	const currentWorkshop = props.workshops.find(w => w._id === workshopId);
 
 	const studentListItems = currentWorkshop.students.map( (student, index) => (
 		<div key={index}>
@@ -51,4 +48,7 @@ const mapStateToProps = state => ({
 	workshops: state.readingWorkshop.user.workshops
 });
 
-export default connect(mapStateToProps)(Workshop);
+export default compose(
+	requiresLogin(),
+	connect(mapStateToProps)
+) (Workshop);

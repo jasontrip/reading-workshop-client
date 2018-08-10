@@ -1,5 +1,4 @@
 import React from 'react';
-import './MenuAppBar.css';
 
 import {Link} from 'react-router-dom';
 
@@ -13,6 +12,9 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
@@ -34,6 +36,14 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
+  drawer: {
+    width: '300px',
+    a: {
+      textDecoration: 'none',
+      color: 'none',
+    },
+  },
+
 };
 
 class MenuAppBar extends React.Component {
@@ -80,13 +90,21 @@ class MenuAppBar extends React.Component {
 
         <Drawer open={this.state.drawerOpen} 
           onClick={this.toggleDrawer(false)}>
-          <div className="drawer" onClick={this.toggleDrawer(false)}>
-            <MenuItem>
-              <Link to="/Workshops">Workshops</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/Roster">Roster</Link>
-            </MenuItem>
+          <div className={classes.drawer} onClick={this.toggleDrawer(false)}>
+            <List>
+              <ListItem button
+                component={Link}
+                to="/Workshops"
+              >
+                <ListItemText primary="Workshops" />
+              </ListItem>
+              <ListItem button
+                component={Link}
+                to="/Roster"
+              >
+                <ListItemText primary="Roster" />
+              </ListItem>
+            </List>
           </div>
         </Drawer>
 

@@ -1,6 +1,8 @@
 import { BASE_URL } from '../config';
 import { loadAuthToken } from '../local-storage';
 
+const delay = s => res => new Promise(resolve => setTimeout(() => resolve(res), s*1000));
+
 export const ADD_STUDENT = 'ADD_STUDENT';
 export const addStudent = (firstName, lastName) => ({
 	type: ADD_STUDENT,
@@ -64,11 +66,9 @@ export const fetchUserData = (authToken) => dispatch => {
 			}
 			return res.json();
 		})
+		.then(delay(1.5))
 		.then((user) => {
 			dispatch(setUserData(user));
-			return new Promise((resolve, reject) => {
-      	setTimeout(resolve, 3000);
-      });
-		})
-		.then(() => dispatch(userDataSucess()));
+			dispatch(userDataSucess())
+		});
 }
