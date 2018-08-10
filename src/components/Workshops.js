@@ -29,7 +29,7 @@ export function Workshops(props) {
 
 	const workshopList = props.workshops
 		.map((workshop, index) => {
-			const workshopDate = moment(workshop.date).format('MMM Do YYYY');
+			const workshopDate = moment(workshop.date).format('MMM Do');
 			const studentList = workshop.students.map((student, index) => {
 				return `${index?', ':''} ${student.firstName} ${student.lastName}`
 			}).join('');
