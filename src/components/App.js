@@ -8,7 +8,7 @@ import Workshop from './Workshop';
 import Roster from './Roster';
 import './App.css';
 
-class App extends Component {
+export class App extends Component {
 
   render() {
     return (

@@ -66,7 +66,7 @@ export const fetchUserData = (authToken) => dispatch => {
 			}
 			return res.json();
 		})
-		.then(delay(1.5))
+		.then(delay(.5))
 		.then((user) => {
 			dispatch(setUserData(user));
 			dispatch(userDataSucess())

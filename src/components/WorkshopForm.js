@@ -7,6 +7,8 @@ import DialogAppBar from './DialogAppBar';
 import TextField from './TextField';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import moment from 'moment';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   root: {
@@ -43,7 +45,7 @@ export function WorkshopForm(props) {
 				valid={valid}
 			/>
 			<div className={classes.formGrid}>
-				<form>
+				<form onSubmit={handleSubmit(onSubmit)}>
 					<Grid container justify="center" direction="row" spacing={24}>
 						<Grid item xs={4}>
 							<Field
@@ -104,6 +106,7 @@ export function WorkshopForm(props) {
 							/>
 						</Grid>
 					</Grid>
+					<Button type="submit" color="primary">see</Button>
 				</form>
 			</div>
 		</div>
@@ -113,7 +116,7 @@ export function WorkshopForm(props) {
 const mapStateToProps = (state, ownProps) => {
 		return {
 			initialValues: {
-				date: ownProps.workshop.date,
+				date: moment(ownProps.workshop.date).format('YYYY-MM-DD'),
 				book: ownProps.workshop.book,
 				pages: ownProps.workshop.pages,
 				notes: ownProps.workshop.notes

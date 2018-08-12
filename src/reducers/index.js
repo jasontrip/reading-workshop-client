@@ -22,7 +22,7 @@ export const readingWorkshopReducer = (state=initialState, action) => {
 		}
 		return Object.assign({}, state,
 			{
-				roster: [...state.roster, newStudent]
+				students: [...state.students, newStudent]
 			}
 		);
 	} else if (action.type === REMOVE_STUDENT) {
