@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import ReactDOM from 'react-dom';
-import { App } from './App';
+import { App } from '../App';
 import {Provider} from 'react-redux';
 // import store from '../store';
 
