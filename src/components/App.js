@@ -6,7 +6,6 @@ import LandingPage from './LandingPage';
 import Workshops from './Workshops';
 import Workshop from './Workshop';
 import Roster from './Roster';
-import './App.css';
 
 export class App extends Component {
 
