@@ -6,7 +6,6 @@ import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import requiresLogin from './requires-login';
 import WorkshopForm from './WorkshopForm';
-import Dialog from '@material-ui/core/Dialog';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -39,17 +38,12 @@ export function Workshop(props) {
 	));
 
 	return (
-		<Dialog
-			fullScreen
-			open={true}
-		>
-			<div>
-				<WorkshopForm workshop={currentWorkshop} history={props.history} />
-				<List>
-					{studentListItems}
-					<Divider />
-				</List>
-			</div>
+		<div>
+			<WorkshopForm workshop={currentWorkshop} history={props.history} />
+			<List>
+				{studentListItems}
+				<Divider />
+			</List>
 			<Button
 				variant="fab"
 				color="primary"
@@ -58,7 +52,7 @@ export function Workshop(props) {
 			>
         <AddIcon />
       </Button>
-		</Dialog>
+		</div>
 	)
 }
 

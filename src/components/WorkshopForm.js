@@ -113,13 +113,13 @@ export function WorkshopForm(props) {
 	)
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, props) => {
 		return {
 			initialValues: {
-				date: moment(ownProps.workshop.date).format('YYYY-MM-DD'),
-				book: ownProps.workshop.book,
-				pages: ownProps.workshop.pages,
-				notes: ownProps.workshop.notes
+				date: moment(props.workshop.date).format('YYYY-MM-DD'),
+				book: props.workshop.book,
+				pages: props.workshop.pages,
+				notes: props.workshop.notes
 			}
 		}
 };

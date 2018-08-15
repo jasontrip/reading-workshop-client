@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import requiresLogin from './requires-login';
@@ -26,7 +27,11 @@ export function Roster(props) {
 
 	const studentList = students.map((student, index) => (
 		<div key={index}>
-			<ListItem button>
+			<ListItem
+				button
+				component={Link}
+				to={`/roster/${student._id}`}
+			>
 				<ListItemText
 					primary={`${student.firstName} ${student.lastName}`}
 				/>

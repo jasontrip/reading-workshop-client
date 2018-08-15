@@ -51,7 +51,7 @@ export const loginFail = (error) => ({
 	error
 });
 
-export const fetchUserData = (authToken) => dispatch => {
+export const fetchUserData = authToken => dispatch => {
 	dispatch(userDataRequest());
 	const authToken = loadAuthToken();
 	return fetch(BASE_URL + '/users', {
@@ -72,3 +72,52 @@ export const fetchUserData = (authToken) => dispatch => {
 			dispatch(userDataSucess())
 		});
 }
+
+export const updateStudent = student => dispatch => {
+	dispatch(updateStudentRequest());
+	const authToken = loadAuthToken();
+
+	return fetch(BASE_URL + '/students', {
+		method: 'PUT',
+		headers: {
+			Authorization: `Bearer ${authToken}`,
+			"Content-Type": "application/json; charset=utf-8",
+		},
+		body: JSON.stringify(student),
+	})
+		.then((res) => {
+			if (!res.ok) {
+				Promise.reject(res.statusText);
+			}
+			return res.json();
+		})
+		.then(delay(1.5))
+		.then((student) => {
+			dispatch(updateStudentSuccess(student));
+		})
+};
+
+export const UPDATE_STUDENT_REQUEST = 'UPDATE_STUDENT_REQUEST';
+export const updateStudentRequest = () => ({
+	type: UPDATE_STUDENT_REQUEST,
+});
+
+export const UPDATE_STUDENT_SUCCESS = 'UPDATE_STUDENT_SUCCESS';
+export const updateStudentSuccess = (student) => ({
+	type: UPDATE_STUDENT_SUCCESS,
+	student
+});
+
+export const DELETE_STUDENT = 'DELETE_STUDENT';
+export const deleteStudent = id => ({
+	type: DELETE_STUDENT,
+	id
+});
+
+
+
+
+
+
+
+

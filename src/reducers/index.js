@@ -4,7 +4,9 @@ import { ADD_STUDENT,
 				 USER_DATA_SUCCESS,
 				 SET_USER_DATA,
 				 CLEAR_USER_DATA,
-				 TOGGLE_LOGIN_OR_REGISTER_DIALOG_OPEN
+				 TOGGLE_LOGIN_OR_REGISTER_DIALOG_OPEN,
+				 UPDATE_STUDENT_REQUEST,
+				 UPDATE_STUDENT_SUCCESS,
 				} from '../actions';
 
 const initialState = {
@@ -62,7 +64,28 @@ export const readingWorkshopReducer = (state=initialState, action) => {
 				user: null
 			}
 		);
+	} else if (action.type === UPDATE_STUDENT_REQUEST) {
+		return Object.assign({}, state,
+			{
+				loading: true
+			}
+		);
+	} else if (action.type === UPDATE_STUDENT_SUCCESS) {
+		return Object.assign({}, state,
+			{
+				loading: false,
+				user: Object.assign({}, { ...state.user }, {
+					students: state.user.students.map(s => {
+						if (s._id === action.student._id) {
+							return action.student;
+						}
+						return s;
+					}),
+				})
+			}
+		);
 	}
+
 	return state;
 }
 

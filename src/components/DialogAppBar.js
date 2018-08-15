@@ -35,7 +35,7 @@ export function DialogAppBar(props) {
 	return (
     <AppBar className={classes.appBar}>
       <Toolbar>
-        <IconButton color="inherit" onClick={handleClose} aria-label="Close">
+        <IconButton onClick={handleClose} aria-label="Close">
           <Link to="/workshops">
             <CloseIcon />
           </Link>
