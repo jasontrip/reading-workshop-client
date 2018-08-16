@@ -91,7 +91,6 @@ export const updateStudent = student => dispatch => {
 			}
 			return res.json();
 		})
-		.then(delay(1.5))
 		.then((student) => {
 			dispatch(updateStudentSuccess(student));
 		})
@@ -126,7 +125,6 @@ export const createStudent = student => dispatch => {
 			}
 			return res.json();
 		})
-		.then(delay(1.5))
 		.then((student) => {
 			dispatch(createStudentSuccess(student));
 		})
@@ -143,13 +141,37 @@ export const createStudentSuccess = (student) => ({
 	student
 });
 
-export const DELETE_STUDENT = 'DELETE_STUDENT';
-export const deleteStudent = id => ({
-	type: DELETE_STUDENT,
-	id
+export const deleteStudent = _id => dispatch => {
+	dispatch(deleteStudentRequest());
+	const authToken = loadAuthToken();
+
+	return fetch(BASE_URL + '/students', {
+		method: 'DELETE',
+		headers: {
+			Authorization: `Bearer ${authToken}`,
+			"Content-Type": "application/json; charset=utf-8",
+		},
+		body: JSON.stringify({ _id }),
+	})
+		.then((res) => {
+			if (!res.ok) {
+				Promise.reject(res.statusText);
+			}
+			dispatch(deleteStudentSuccess(_id));
+		});
+
+};
+
+export const DELETE_STUDENT_REQUEST = 'DELETE_STUDENT_REQUEST';
+export const deleteStudentRequest = () => ({
+	type: DELETE_STUDENT_REQUEST
 });
 
-
+export const DELETE_STUDENT_SUCCESS = 'DELETE_STUDENT_SUCCESS';
+export const deleteStudentSuccess = (_id) => ({
+	type: DELETE_STUDENT_SUCCESS,
+	_id
+});
 
 
 

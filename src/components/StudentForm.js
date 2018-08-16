@@ -1,13 +1,13 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import TextField from './TextField';
-import {reduxForm, Field} from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-import { updateStudent, createStudent } from '../actions';
+import { updateStudent, createStudent, deleteStudent } from '../actions';
 
 const styles = theme => ({
 	root: {
@@ -21,7 +21,8 @@ const styles = theme => ({
 });
 
 export function StudentForm(props) {
-	const {editingStudent, editStudent, classes, dispatch, handleSubmit, pristine, submitting, valid} = props;
+	const { editingStudent, editStudent, classes, dispatch } = props;
+	const { handleSubmit, pristine, submitting, valid } = props;
 
 	const onSubmit = (values) => {
 		const _id = editingStudent._id;
@@ -32,13 +33,19 @@ export function StudentForm(props) {
 		dispatch(createStudent({ ...values }));
 	}
 
-	const onCancel = () => {
+	const onCancel = (event) => {
+		event.preventDefault();
 		editStudent(null);
 	}
 
+	const onDelete = (event) => {
+		event.preventDefault();
+		dispatch(deleteStudent(editingStudent._id));
+	}
+
 	return (
-		<div className={classes.root} >
-			<form onSubmit={handleSubmit(onSubmit)} >
+		<div className={ classes.root } >
+			<form onSubmit={ handleSubmit(onSubmit) } >
 				<Grid container justify="center" direction="row" spacing={40}>
 					<Grid item>
 						<Field
@@ -46,7 +53,7 @@ export function StudentForm(props) {
 							label="first name"
 							type="text"
 							className="textField"
-							component={TextField}
+							component={ TextField }
 						/>
 					</Grid>
 					<Grid item>
@@ -54,35 +61,36 @@ export function StudentForm(props) {
 							name="lastName"
 							label="last name"
 							type="text"
-							component={TextField}
+							component={ TextField }
 						/>
 					</Grid>
 				</Grid>
 				<Grid container justify="center" direction="row" spacing={8}>
 					<Grid item>
 						<Button
-							className={classes.button}
+							className={ classes.button }
 							type="submit"
 							color="primary"
-							disabled={ pristine || submitting }
+							disabled={ pristine || submitting || !valid }
 						>
 							Save
 						</Button>
 					</Grid>
 					<Grid item>
 						<Button
-							className={classes.button}
+							className={ classes.button }
 							color="primary"
-							onClick={ onCancel }
+							onClick={ event => onCancel(event) }
 						>
 							Cancel
 						</Button>
 					</Grid>
 					<Grid item>
 						<Button
-							className={classes.button}
+							className={ classes.button }
 							type="submit"
 							color="primary"
+							onClick={ event => onDelete(event) }
 						>
 							Delete
 						</Button>

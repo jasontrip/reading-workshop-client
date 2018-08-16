@@ -9,6 +9,8 @@ import { ADD_STUDENT,
 				 UPDATE_STUDENT_SUCCESS,
 				 CREATE_STUDENT_REQUEST,
 				 CREATE_STUDENT_SUCCESS,
+				 DELETE_STUDENT_REQUEST,
+				 DELETE_STUDENT_SUCCESS,
 				} from '../actions';
 
 const initialState = {
@@ -96,7 +98,24 @@ export const readingWorkshopReducer = (state=initialState, action) => {
 		return Object.assign({}, state,
 			{
 				loading: false,
-				students: Object.assign([], [ ...state.user.students, action.student ])
+				user: Object.assign({}, { ...state.user }, {
+					students: [ ...state.user.students, action.student ]
+				})
+			}
+		);
+	} else if (action.type === DELETE_STUDENT_REQUEST) {
+		return Object.assign({}, state,
+			{
+				loading: true
+			}
+		);
+	} else if (action.type === DELETE_STUDENT_SUCCESS) {
+		return Object.assign({}, state,
+			{
+				loading: false,
+				user: Object.assign({}, { ...state.user }, {
+					students: state.user.students.filter(s => s._id !== action._id)
+				})
 			}
 		);
 	}
