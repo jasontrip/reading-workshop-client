@@ -7,12 +7,12 @@ import {reduxForm, Field} from 'redux-form';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-import { updateStudent } from '../actions';
+import { updateStudent, createStudent } from '../actions';
 
 const styles = theme => ({
 	root: {
 		flexGrow: 1,
-		marginTop: '85px',
+		marginTop: '20px',
 		padding: '0px 25px 25px 25px',
 	},
 	button: {
@@ -21,12 +21,19 @@ const styles = theme => ({
 });
 
 export function StudentForm(props) {
-	const {studentId, classes, dispatch, handleSubmit, pristine, submitting, valid} = props;
+	const {editingStudent, editStudent, classes, dispatch, handleSubmit, pristine, submitting, valid} = props;
 
 	const onSubmit = (values) => {
-		const _id = studentId;
-		const updatedStudent = { _id, ...values };
-		dispatch(updateStudent(updatedStudent));
+		const _id = editingStudent._id;
+		if (_id) {
+			const updatedStudent = { _id, ...values };
+			dispatch(updateStudent(updatedStudent));			
+		}
+		dispatch(createStudent({ ...values }));
+	}
+
+	const onCancel = () => {
+		editStudent(null);
 	}
 
 	return (
@@ -65,9 +72,17 @@ export function StudentForm(props) {
 					<Grid item>
 						<Button
 							className={classes.button}
+							color="primary"
+							onClick={ onCancel }
+						>
+							Cancel
+						</Button>
+					</Grid>
+					<Grid item>
+						<Button
+							className={classes.button}
 							type="submit"
 							color="primary"
-							disabled={ studentId?false:true }
 						>
 							Delete
 						</Button>
@@ -79,13 +94,19 @@ export function StudentForm(props) {
 }
 
 const mapStateToProps = (state, props) => {
-	const { students } = state.readingWorkshop.user;
-	const student = students.find(s => s._id === props.studentId);
+	const { editingStudent } = props;
+	let firstName = '';
+	let lastName = '';
+
+	if (editingStudent) {
+		firstName = editingStudent.firstName;
+		lastName = editingStudent.lastName;
+	}
 
 	return {
 		initialValues: {
-			firstName: student.firstName || '',
-			lastName: student.lastName || '',
+			firstName: firstName,
+			lastName: lastName,
 		}
 	}
 };

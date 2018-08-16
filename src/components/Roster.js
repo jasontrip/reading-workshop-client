@@ -1,57 +1,47 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import compose from 'recompose/compose';
-import { withStyles } from '@material-ui/core/styles';
 import requiresLogin from './requires-login';
 import MenuAppBar from './MenuAppBar';
+import RosterList from './RosterList';
+import StudentForm from './StudentForm';
 
-import {List} from '@material-ui/core/';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
+export class Roster extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { editingStudent: null }
+		this.editStudent = this.editStudent.bind(this);
+	}
 
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-    position: 'absolute',
-    bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 2,
-  },
-});
+	editStudent(editingStudent) {
+		this.setState({
+			editingStudent,
+		});
+	}
 
-export function Roster(props) {
-	const { students, classes } = props;
+	render() {
+		const { students } = this.props;
+		const { editingStudent } = this.state;
 
-	const studentList = students.map((student, index) => (
-		<div key={index}>
-			<ListItem
-				button
-				component={Link}
-				to={`/roster/${student._id}`}
-			>
-				<ListItemText
-					primary={`${student.firstName} ${student.lastName}`}
-				/>
-			</ListItem>
-			<Divider />
-		</div>
-	));
-
-	return (
-		<div>
-			<MenuAppBar pageTitle="Roster" />
-			<List>
-				{studentList}
-			</List>
-
-			<Button variant="fab" color="secondary" aria-label="Add" className={classes.button}>
-        <AddIcon />
-      </Button>
-		</div>
-	);
+		return (
+			<div>
+				<MenuAppBar pageTitle="Roster" />
+				{ 
+					editingStudent
+					?(<StudentForm
+							editingStudent={ editingStudent }
+							editStudent={ this.editStudent }
+						/>
+					 )
+					:(<RosterList
+							students={ students }
+							editStudent={ this.editStudent }
+						/>
+					 )
+				}
+			</div>
+		);
+	} 
 }
 
 const mapStateToProps = state => ({
@@ -60,6 +50,5 @@ const mapStateToProps = state => ({
 
 export default compose(
 	requiresLogin(),
-	withStyles(styles),
 	connect(mapStateToProps)
 ) (Roster);

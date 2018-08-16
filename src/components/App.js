@@ -6,7 +6,6 @@ import LandingPage from './LandingPage';
 import Workshops from './Workshops';
 import Workshop from './Workshop';
 import Roster from './Roster';
-import Student from './Student';
 
 export class App extends Component {
 
@@ -20,7 +19,6 @@ export class App extends Component {
                 <Route exact path="/workshops" component={Workshops} />
                 <Route exact path="/workshops/:workshopId" component={Workshop} />
                 <Route exact path="/roster" component={Roster} />
-                <Route exact path="/roster/:studentId" component={Student} />
               </div>
           </main>
         </Router>

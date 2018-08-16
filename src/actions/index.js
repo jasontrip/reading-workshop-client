@@ -108,6 +108,41 @@ export const updateStudentSuccess = (student) => ({
 	student
 });
 
+export const createStudent = student => dispatch => {
+	dispatch(createStudentRequest());
+	const authToken = loadAuthToken();
+
+	return fetch(BASE_URL + '/students', {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${authToken}`,
+			"Content-Type": "application/json; charset=utf-8",
+		},
+		body: JSON.stringify(student),
+	})
+		.then((res) => {
+			if (!res.ok) {
+				Promise.reject(res.statusText);
+			}
+			return res.json();
+		})
+		.then(delay(1.5))
+		.then((student) => {
+			dispatch(createStudentSuccess(student));
+		})
+};
+
+export const CREATE_STUDENT_REQUEST = 'CREATE_STUDENT_REQUEST';
+export const createStudentRequest = () => ({
+	type: CREATE_STUDENT_REQUEST,
+});
+
+export const CREATE_STUDENT_SUCCESS = 'CREATE_STUDENT_SUCCESS';
+export const createStudentSuccess = (student) => ({
+	type: CREATE_STUDENT_SUCCESS,
+	student
+});
+
 export const DELETE_STUDENT = 'DELETE_STUDENT';
 export const deleteStudent = id => ({
 	type: DELETE_STUDENT,
