@@ -4,6 +4,7 @@ import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from './TextField';
 import { reduxForm, Field } from 'redux-form';
+import { required, nonEmpty } from '../validators';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
@@ -54,6 +55,7 @@ export function StudentForm(props) {
 							type="text"
 							className="textField"
 							component={ TextField }
+							validate={ [ required, nonEmpty ] }
 						/>
 					</Grid>
 					<Grid item>
@@ -62,6 +64,7 @@ export function StudentForm(props) {
 							label="last name"
 							type="text"
 							component={ TextField }
+							validate={ [ required, nonEmpty ] }
 						/>
 					</Grid>
 				</Grid>
@@ -90,7 +93,8 @@ export function StudentForm(props) {
 							className={ classes.button }
 							type="submit"
 							color="primary"
-							onClick={ event => onDelete(event) }
+							onClick={ event => onDelete(event)}
+							disabled={Object.keys(editingStudent).length === 0}
 						>
 							Delete
 						</Button>

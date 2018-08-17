@@ -9,4 +9,4 @@ export const email = value =>
 
 export const noWhitespace = value =>
 	value.trim() === value? undefined:
-		'Cannot start or end with empty spaces'
+		'Cannot start or end with empty spaces';
