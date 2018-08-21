@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import LandingPage from './LandingPage';
 import Workshops from './Workshops';
 import Roster from './Roster';
-import WorkshopModal from './WorkshopModal';
 
 export class App extends Component {
 
@@ -17,10 +16,8 @@ export class App extends Component {
               <div>
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/workshops" component={Workshops} />
-                <Route exact path="/workshops/:workshopId" component={Workshops} />
                 <Route exact path="/roster" component={Roster} />
               </div>
-              <WorkshopModal />
           </main>
 
         </Router>

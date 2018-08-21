@@ -8,7 +8,6 @@ import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import moment from 'moment';
 import Button from '@material-ui/core/Button';
-import { editWorkshop } from '../actions/workshops';
 import { createWorkshop, updateWorkshop, deleteWorkshop } from '../actions/user';
 
 const styles = theme => ({
@@ -33,13 +32,13 @@ const styles = theme => ({
 });
 
 export function WorkshopForm(props) {
-	const { currentWorkshop, dispatch, classes, handleSubmit, pristine, submitting, valid } = props;
+	const { editWorkshop, editingWorkshop, dispatch, classes, handleSubmit, pristine, submitting, valid } = props;
 
 	const onSubmit = (values) => {
-		if (currentWorkshop?Object.keys(currentWorkshop).length === 0:false) {
+		if (editingWorkshop?Object.keys(editingWorkshop).length === 0:false) {
 			dispatch(createWorkshop({ ...values }));
 		} else {
-			const { _id } = currentWorkshop;
+			const { _id } = editingWorkshop;
 			const updatedWorkshop = { _id, ...values };
 			dispatch(updateWorkshop(updatedWorkshop));
 		}
@@ -47,12 +46,12 @@ export function WorkshopForm(props) {
 
 	const onCancel = (event) => {
 		event.preventDefault();
-		dispatch(editWorkshop(null));
+		editWorkshop(null);
 	}
 
 	const onDelete = (event) => {
 		event.preventDefault();
-		dispatch(deleteWorkshop(currentWorkshop._id));
+		dispatch(deleteWorkshop(editingWorkshop._id));
 	}
 
 	return (
@@ -138,7 +137,7 @@ export function WorkshopForm(props) {
 						className={ classes.button }
 						color="primary"
 						onClick={ event => onDelete(event)}
-						disabled={ currentWorkshop?Object.keys(currentWorkshop).length === 0:false }
+						disabled={ editingWorkshop?Object.keys(editingWorkshop).length === 0:false }
 					>
 						Delete
 					</Button>
@@ -149,17 +148,17 @@ export function WorkshopForm(props) {
 }
 
 const mapStateToProps = (state, props) => {
-	const { currentWorkshop } = props;
+	const { editingWorkshop } = props;
+
 	let initialValues;
 
-	if (currentWorkshop) {
-		const { date, book, pages, notes } = currentWorkshop;
+	if (editingWorkshop) {
+		const { date, book, pages, notes } = editingWorkshop;
 		initialValues = {
 			date: moment(date).format('YYYY-MM-DD'),
 			book, pages, notes
 		}
 	}
-
 		return {
 			initialValues
 		}
