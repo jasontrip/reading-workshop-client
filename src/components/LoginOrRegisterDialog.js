@@ -103,7 +103,6 @@ LoginOrRegisterDialog.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  error: state.readingWorkshop.error
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(LoginOrRegisterDialog));

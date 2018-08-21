@@ -14,6 +14,8 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 
+import { editWorkshop } from '../actions/workshops';
+
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
@@ -24,9 +26,10 @@ const styles = theme => ({
 });
 
 export function Workshop(props) {
-	const { classes } = props;
+	const { classes, dispatch } = props;
 	const { workshopId } = props.match.params;
 	const currentWorkshop = props.workshops.find(w => w._id === workshopId);
+	dispatch(editWorkshop(currentWorkshop));
 
 	const studentListItems = currentWorkshop.students.map( (student, index) => (
 		<div key={index}>
@@ -57,7 +60,7 @@ export function Workshop(props) {
 }
 
 const mapStateToProps = state => ({
-	workshops: state.readingWorkshop.user.workshops
+	workshops: state.user.workshops
 });
 
 export default compose(

@@ -8,7 +8,7 @@ import { required, nonEmpty } from '../validators';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-import { updateStudent, createStudent, deleteStudent } from '../actions';
+import { updateStudent, createStudent, deleteStudent } from '../actions/user';
 
 const styles = theme => ({
 	root: {
@@ -30,8 +30,9 @@ export function StudentForm(props) {
 		if (_id) {
 			const updatedStudent = { _id, ...values };
 			dispatch(updateStudent(updatedStudent));			
+		} else {
+			dispatch(createStudent({ ...values }));
 		}
-		dispatch(createStudent({ ...values }));
 	}
 
 	const onCancel = (event) => {
@@ -91,10 +92,9 @@ export function StudentForm(props) {
 					<Grid item>
 						<Button
 							className={ classes.button }
-							type="submit"
 							color="primary"
 							onClick={ event => onDelete(event)}
-							disabled={Object.keys(editingStudent).length === 0}
+							disabled={editingStudent?Object.keys(editingStudent).length === 0:false }
 						>
 							Delete
 						</Button>

@@ -18,9 +18,9 @@ export default () => Component => {
 	});
 
 	function RequiresLogin(props) {
-		const {authenticating, requestingUserData, loggedIn, classes, ...passThroughProps} = props;
+		const { loading, loggedIn, classes, ...passThroughProps } = props;
 
-		if (authenticating || requestingUserData) {
+		if (loading) {
 			return (
 				<Grid
 				  container
@@ -32,7 +32,9 @@ export default () => Component => {
 					</Grid>
 				</Grid>
 			);
-		} else if (!loggedIn) {
+		}
+
+		if (!loggedIn) {
 			return <Redirect to="/" />;
 		}
 
@@ -40,9 +42,8 @@ export default () => Component => {
 	}
 
 	const mapStateToProps = (state, props) => ({
-		authenticating: state.auth.loading,
-		requestingUserData: state.readingWorkshop.loading,
-		loggedIn: state.readingWorkshop.user !== null
+		loading: state.ui.loading,
+		loggedIn: state.user !== null
 	});
 
 	return compose(

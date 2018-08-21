@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import compose from 'recompose/compose';
-import requiresLogin from './requires-login';
+import requiresLogin from './requiresLogin';
 import MenuAppBar from './MenuAppBar';
 import RosterList from './RosterList';
 import StudentForm from './StudentForm';
@@ -45,7 +45,7 @@ export class Roster extends Component {
 }
 
 const mapStateToProps = state => ({
-	students: state.readingWorkshop.user.students
+	students: state.user.students
 });
 
 export default compose(

@@ -3,12 +3,13 @@ import {connect} from 'react-redux';
 import compose from 'recompose/compose';
 import {reduxForm, Field} from 'redux-form';
 import {required, nonEmpty} from '../validators';
-import DialogAppBar from './DialogAppBar';
 import TextField from './TextField';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import moment from 'moment';
 import Button from '@material-ui/core/Button';
+import { editWorkshop } from '../actions/workshops';
+import { createWorkshop, updateWorkshop, deleteWorkshop } from '../actions/user';
 
 const styles = theme => ({
   root: {
@@ -26,24 +27,36 @@ const styles = theme => ({
   notesField: {
   	width: '100%',
   },
+  button: {
+		marginTop: '20px',
+	},
 });
 
-function onSubmit(values) {
-	console.log(values);
-}
-
 export function WorkshopForm(props) {
-	const {classes, handleSubmit, pristine, submitting, valid} = props;
+	const { currentWorkshop, dispatch, classes, handleSubmit, pristine, submitting, valid } = props;
+
+	const onSubmit = (values) => {
+		if (currentWorkshop?Object.keys(currentWorkshop).length === 0:false) {
+			dispatch(createWorkshop({ ...values }));
+		} else {
+			const { _id } = currentWorkshop;
+			const updatedWorkshop = { _id, ...values };
+			dispatch(updateWorkshop(updatedWorkshop));
+		}
+	}
+
+	const onCancel = (event) => {
+		event.preventDefault();
+		dispatch(editWorkshop(null));
+	}
+
+	const onDelete = (event) => {
+		event.preventDefault();
+		dispatch(deleteWorkshop(currentWorkshop._id));
+	}
 
 	return (
 		<div className={classes.root}>
-			<DialogAppBar
-				dialogTitle="Workshop"
-				onSubmit={handleSubmit(onSubmit)}
-				pristine={pristine}
-				submitting={submitting}
-				valid={valid}
-			/>
 			<div className={classes.formGrid}>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Grid container justify="center" direction="row" spacing={24}>
@@ -61,7 +74,7 @@ export function WorkshopForm(props) {
 				          disableUnderline: false,
 				          className: classes.workshopTextField,
 				        }}
-								validate={[required, nonEmpty]}
+								validate={ [required, nonEmpty] }
 							/>
 						</Grid>
 						<Grid item xs={6}>
@@ -106,7 +119,29 @@ export function WorkshopForm(props) {
 							/>
 						</Grid>
 					</Grid>
-					<Button type="submit" color="primary">see</Button>
+					<Button
+						className={ classes.button }
+						type="submit"
+						color="primary"
+						disabled={ pristine || submitting || !valid }
+					>
+						Save
+					</Button>
+					<Button
+						className={ classes.button }
+						color="primary"
+						onClick={ event => onCancel(event) }
+					>
+						Cancel
+					</Button>
+					<Button
+						className={ classes.button }
+						color="primary"
+						onClick={ event => onDelete(event)}
+						disabled={ currentWorkshop?Object.keys(currentWorkshop).length === 0:false }
+					>
+						Delete
+					</Button>
 				</form>
 			</div>
 		</div>
@@ -114,13 +149,19 @@ export function WorkshopForm(props) {
 }
 
 const mapStateToProps = (state, props) => {
+	const { currentWorkshop } = props;
+	let initialValues;
+
+	if (currentWorkshop) {
+		const { date, book, pages, notes } = currentWorkshop;
+		initialValues = {
+			date: moment(date).format('YYYY-MM-DD'),
+			book, pages, notes
+		}
+	}
+
 		return {
-			initialValues: {
-				date: moment(props.workshop.date).format('YYYY-MM-DD'),
-				book: props.workshop.book,
-				pages: props.workshop.pages,
-				notes: props.workshop.notes
-			}
+			initialValues
 		}
 };
 

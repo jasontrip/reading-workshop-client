@@ -1,7 +1,8 @@
 import { BASE_URL } from '../config';
 import { SubmissionError } from 'redux-form';
-import { setUserData, toggleLoginOrRegisterDialogOpen } from './';
-import { saveAuthToken, clearAuthToken } from '../local-storage';
+import { setUserData } from './user';
+import { saveAuthToken, clearAuthToken } from '../localStorage';
+import { toggleLoginOrRegisterDialogOpen, loading } from './ui';
 
 export const AUTH_REQUEST = 'AUTH_REQUEST';
 export const authRequest = () => ({
@@ -14,7 +15,7 @@ export const authSuccess = () => ({
 });
 
 export const loginOrRegisterUser = (endpoint, user) => dispatch => {
-    dispatch(authRequest());
+    dispatch(loading(true));
     const ambiguousLoginError = {
         username: 'Username or password incorrect'
     };
@@ -38,7 +39,7 @@ export const loginOrRegisterUser = (endpoint, user) => dispatch => {
         saveAuthToken(res.authToken);
         dispatch(setUserData(res.user));
         dispatch(toggleLoginOrRegisterDialogOpen(false));
-        dispatch(authSuccess());
+        dispatch(loading(false));
     })
     .catch(err => {
         console.log(err);
@@ -47,7 +48,7 @@ export const loginOrRegisterUser = (endpoint, user) => dispatch => {
 };
 
 export const refreshAuthToken = (authToken) => (dispatch) => {
-    dispatch(authRequest());
+    dispatch(loading(true));
     return fetch(`${BASE_URL}/auth/refresh`, {
         method: 'POST',
         headers: {
@@ -69,6 +70,6 @@ export const refreshAuthToken = (authToken) => (dispatch) => {
             clearAuthToken(authToken);
         })
         .finally(() => {
-            dispatch(authSuccess());
+            dispatch(loading(false));
         });
 };

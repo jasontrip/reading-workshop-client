@@ -22,8 +22,9 @@ import Drawer from '@material-ui/core/Drawer';
 
 import LoginOrRegisterDialog from './LoginOrRegisterDialog';
 
-import { clearAuthToken } from '../local-storage';
-import { toggleLoginOrRegisterDialogOpen, clearUserData } from '../actions';
+import { clearAuthToken } from '../localStorage';
+import { clearUserData } from '../actions/user';
+import { toggleLoginOrRegisterDialogOpen } from '../actions/ui';
 
 const styles = {
   root: {
@@ -165,8 +166,8 @@ class MenuAppBar extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.readingWorkshop.user,
-  showLoginOrRegisterDialog: state.readingWorkshop.showLoginOrRegisterDialog
+  user: state.user,
+  showLoginOrRegisterDialog: state.ui.showLoginOrRegisterDialog
 });
 
 MenuAppBar.propTypes = {
