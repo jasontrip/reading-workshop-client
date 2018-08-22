@@ -1,7 +1,7 @@
 node_js:
  - "9"
 script:
- - npm test
+ - npm install && npm test
 env:
  - CI=true
 
