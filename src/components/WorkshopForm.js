@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TextField from './TextField';
 import Button from '@material-ui/core/Button';
+import WorkshopStudentList from './WorkshopStudentList';
 import { createWorkshop, updateWorkshop, deleteWorkshop } from '../actions/user';
 
 const styles = theme => ({
@@ -25,7 +26,6 @@ const styles = theme => ({
   	width: '100%',
   },
   workshopTextField: {
-  	backgroundColor: '#e8e8e8',
   },
   notesField: {
   	width: '100%',
@@ -121,30 +121,35 @@ export function WorkshopForm(props) {
 								component={TextField}
 							/>
 						</Grid>
+						<Grid item xs={12}>
+							<WorkshopStudentList students={ editingWorkshop.students } />
+						</Grid>
+						<Grid item xs={12}>
+							<Button
+								className={ classes.button }
+								type="submit"
+								color="primary"
+								disabled={ pristine || submitting || !valid }
+							>
+								Save
+							</Button>
+							<Button
+								className={ classes.button }
+								color="primary"
+								onClick={ event => onCancel(event) }
+							>
+								Cancel
+							</Button>
+							<Button
+								className={ classes.button }
+								color="primary"
+								onClick={ event => onDelete(event)}
+								disabled={ editingWorkshop?Object.keys(editingWorkshop).length === 0:false }
+							>
+								Delete
+							</Button>
+						</Grid>
 					</Grid>
-					<Button
-						className={ classes.button }
-						type="submit"
-						color="primary"
-						disabled={ pristine || submitting || !valid }
-					>
-						Save
-					</Button>
-					<Button
-						className={ classes.button }
-						color="primary"
-						onClick={ event => onCancel(event) }
-					>
-						Cancel
-					</Button>
-					<Button
-						className={ classes.button }
-						color="primary"
-						onClick={ event => onDelete(event)}
-						disabled={ editingWorkshop?Object.keys(editingWorkshop).length === 0:false }
-					>
-						Delete
-					</Button>
 				</form>
 			</div>
 		</Paper>
