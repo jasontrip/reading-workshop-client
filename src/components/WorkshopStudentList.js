@@ -36,7 +36,7 @@ class WorkshopStudentList extends Component {
 	}
 
 	render() {
-		const { students, classes } = this.props;
+		const { classes } = this.props;
 		const { openSelectStudentDialog } = this.state;
 
 		return (

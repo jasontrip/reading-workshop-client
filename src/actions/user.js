@@ -2,7 +2,7 @@ import { BASE_URL } from '../config';
 import { loadAuthToken } from '../localStorage';
 import { loading } from './ui';
 
-const delay = s => res => new Promise(resolve => setTimeout(() => resolve(res), s*1000));
+// const delay = s => res => new Promise(resolve => setTimeout(() => resolve(res), s*1000));
 
 export const ADD_STUDENT = 'ADD_STUDENT';
 export const addStudent = (firstName, lastName) => ({
