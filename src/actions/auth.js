@@ -42,7 +42,6 @@ export const loginOrRegisterUser = (endpoint, user) => dispatch => {
         dispatch(loading(false));
     })
     .catch(err => {
-        console.log(err);
         throw new SubmissionError(err);
     });
 };

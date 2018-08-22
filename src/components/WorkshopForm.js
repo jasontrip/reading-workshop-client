@@ -3,16 +3,20 @@ import {connect} from 'react-redux';
 import compose from 'recompose/compose';
 import {reduxForm, Field} from 'redux-form';
 import {required, nonEmpty} from '../validators';
-import TextField from './TextField';
 import {withStyles} from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import moment from 'moment';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import TextField from './TextField';
 import Button from '@material-ui/core/Button';
 import { createWorkshop, updateWorkshop, deleteWorkshop } from '../actions/user';
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
+    maxWidth: '500px',
+    marginTop: '15px',
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
   formGrid: {
   	padding: '25px',
@@ -55,7 +59,7 @@ export function WorkshopForm(props) {
 	}
 
 	return (
-		<div className={classes.root}>
+		<Paper className={classes.root}>
 			<div className={classes.formGrid}>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Grid container justify="center" direction="row" spacing={24}>
@@ -143,7 +147,7 @@ export function WorkshopForm(props) {
 					</Button>
 				</form>
 			</div>
-		</div>
+		</Paper>
 	)
 }
 

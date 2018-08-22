@@ -2,20 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from './TextField';
 import { reduxForm, Field } from 'redux-form';
 import { required, nonEmpty } from '../validators';
-import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import TextField from './TextField';
+import Button from '@material-ui/core/Button';
 
 import { updateStudent, createStudent, deleteStudent } from '../actions/user';
 
 const styles = theme => ({
-	root: {
-		flexGrow: 1,
-		marginTop: '20px',
-		padding: '0px 25px 25px 25px',
-	},
+  root: {
+    maxWidth: '400px',
+    marginTop: '35px',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
 	button: {
 		marginTop: '20px',
 	},
@@ -46,7 +48,7 @@ export function StudentForm(props) {
 	}
 
 	return (
-		<div className={ classes.root } >
+		<Paper className={ classes.root } >
 			<form onSubmit={ handleSubmit(onSubmit) } >
 				<Grid container justify="center" direction="row" spacing={40}>
 					<Grid item>
@@ -101,7 +103,7 @@ export function StudentForm(props) {
 					</Grid>
 				</Grid>
 			</form>
-		</div>
+		</Paper>
 	);
 }
 

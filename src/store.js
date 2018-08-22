@@ -1,6 +1,5 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import { userReducer } from './reducers/user';
-import { workshopsReducer } from './reducers/workshops';
 import { authReducer } from './reducers/auth';
 import { uiReducer } from './reducers/ui';
 import {reducer as formReducer} from 'redux-form';
@@ -15,7 +14,6 @@ const store = createStore(
 		form: formReducer,
 		ui: uiReducer,
 		user: userReducer,
-		workshops: workshopsReducer,
 		auth: authReducer,
 	}),
 	composeWithDevTools(applyMiddleware(thunk))
