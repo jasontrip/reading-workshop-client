@@ -30,9 +30,7 @@ export const userReducer = (state=initialState, action) => {
 	} else if (action.type === SET_USER_DATA) {
 		return Object.assign({}, state, { ...action.user });
 	} else if (action.type === CLEAR_USER_DATA) {
-		return Object.assign({}, state, {
-				user: null
-		});
+		return null;
 	} else if (action.type === CREATE_STUDENT_SUCCESS) {
 		return Object.assign({}, state, {
 			students: [ ...state.students, action.student ]

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import compose from 'recompose/compose';
 import {reduxForm, Field} from 'redux-form';
@@ -35,10 +35,10 @@ const styles = theme => ({
 	},
 });
 
-export function WorkshopForm(props) {
-	const { editWorkshop, editingWorkshop, dispatch, classes, handleSubmit, pristine, submitting, valid } = props;
+class WorkshopForm extends Component {
 
-	const onSubmit = (values) => {
+	onSubmit = (values) => {
+		const { editingWorkshop, dispatch } = this.props;
 		if (editingWorkshop?Object.keys(editingWorkshop).length === 0:false) {
 			dispatch(createWorkshop({ ...values }));
 		} else {
@@ -48,112 +48,118 @@ export function WorkshopForm(props) {
 		}
 	}
 
-	const onCancel = (event) => {
+	onCancel = (event) => {
 		event.preventDefault();
-		editWorkshop(null);
+		this.props.editWorkshop(null);
 	}
 
-	const onDelete = (event) => {
+	onDelete = (event) => {
 		event.preventDefault();
-		dispatch(deleteWorkshop(editingWorkshop._id));
+		this.props.dispatch(deleteWorkshop(this.props.editingWorkshop._id));
 	}
 
-	return (
-		<Paper className={classes.root}>
-			<div className={classes.formGrid}>
-				<form onSubmit={handleSubmit(onSubmit)}>
-					<Grid container justify="center" direction="row" spacing={24}>
-						<Grid item xs={4}>
-							<Field
-								name="date"
-								label="date"
-								type="date"
-								className={classes.textField}
-								component={TextField}
-								InputLabelProps={{
-									shrink: true
-								}}
-								InputProps={{
-				          disableUnderline: false,
-				          className: classes.workshopTextField,
-				        }}
-								validate={ [required, nonEmpty] }
-							/>
+	render() {
+		const { editingWorkshop, classes, handleSubmit } = this.props;
+		const { pristine, submitting, valid } = this.props;
+		
+		return (
+			<Paper className={classes.root}>
+				<div className={classes.formGrid}>
+					<form onSubmit={ handleSubmit(this.onSubmit) }>
+						<Grid container justify="center" direction="row" spacing={24}>
+							<Grid item xs={4}>
+								<Field
+									name="date"
+									label="date"
+									type="date"
+									className={classes.textField}
+									component={TextField}
+									InputLabelProps={{
+										shrink: true
+									}}
+									InputProps={{
+					          disableUnderline: false,
+					          className: classes.workshopTextField,
+					        }}
+									validate={ [required, nonEmpty] }
+								/>
+							</Grid>
+							<Grid item xs={6}>
+								<Field
+									name="book"
+									label="book"
+									type="text"
+									InputProps={{
+					          disableUnderline: false,
+					          className: classes.workshopTextField,
+					        }}
+									className={classes.textField}
+									component={TextField}
+									validate={[required, nonEmpty]}
+								/>
+							</Grid>
+							<Grid item xs={2}>
+								<Field
+									name="pages"
+									label="pages"
+									type="text"
+									InputProps={{
+					          disableUnderline: false,
+					          className: classes.workshopTextField,
+					        }}
+									className={classes.textField}
+									component={TextField}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<Field
+									name="notes"
+									label="notes"
+									type="text"
+									InputProps={{
+					          disableUnderline: false,
+					          className: classes.workshopTextField,
+					        }}
+									className={classes.notesField}
+									multiline={true}
+									component={TextField}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<WorkshopStudentList students={ editingWorkshop.students } />
+							</Grid>
+							<Grid item xs={12}>
+								<Button
+									className={ classes.button }
+									type="submit"
+									color="primary"
+									disabled={ pristine || submitting || !valid }
+								>
+									Save
+								</Button>
+								<Button
+									className={ classes.button }
+									color="primary"
+									onClick={ event => this.onCancel(event) }
+								>
+									Cancel
+								</Button>
+								<Button
+									className={ classes.button }
+									color="primary"
+									onClick={ event => this.onDelete(event)}
+									disabled={ editingWorkshop?Object.keys(editingWorkshop).length === 0:false }
+								>
+									Delete
+								</Button>
+							</Grid>
 						</Grid>
-						<Grid item xs={6}>
-							<Field
-								name="book"
-								label="book"
-								type="text"
-								InputProps={{
-				          disableUnderline: false,
-				          className: classes.workshopTextField,
-				        }}
-								className={classes.textField}
-								component={TextField}
-								validate={[required, nonEmpty]}
-							/>
-						</Grid>
-						<Grid item xs={2}>
-							<Field
-								name="pages"
-								label="pages"
-								type="text"
-								InputProps={{
-				          disableUnderline: false,
-				          className: classes.workshopTextField,
-				        }}
-								className={classes.textField}
-								component={TextField}
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<Field
-								name="notes"
-								label="notes"
-								type="text"
-								InputProps={{
-				          disableUnderline: false,
-				          className: classes.workshopTextField,
-				        }}
-								className={classes.notesField}
-								multiline={true}
-								component={TextField}
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<WorkshopStudentList students={ editingWorkshop.students } />
-						</Grid>
-						<Grid item xs={12}>
-							<Button
-								className={ classes.button }
-								type="submit"
-								color="primary"
-								disabled={ pristine || submitting || !valid }
-							>
-								Save
-							</Button>
-							<Button
-								className={ classes.button }
-								color="primary"
-								onClick={ event => onCancel(event) }
-							>
-								Cancel
-							</Button>
-							<Button
-								className={ classes.button }
-								color="primary"
-								onClick={ event => onDelete(event)}
-								disabled={ editingWorkshop?Object.keys(editingWorkshop).length === 0:false }
-							>
-								Delete
-							</Button>
-						</Grid>
-					</Grid>
-				</form>
-			</div>
-		</Paper>
-	)
+					</form>
+				</div>
+			</Paper>
+		)
+	}
+	
 }
 
 const mapStateToProps = (state, props) => {

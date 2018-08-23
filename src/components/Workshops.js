@@ -6,18 +6,15 @@ import WorkshopForm from './WorkshopForm';
 
 class Workshops extends Component {
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			editingWorkshop: null
-		}
-		this.editWorkshop = this.editWorkshop.bind(this);
+	state = {
+		editingWorkshop: null
 	}
 
-	editWorkshop(editingWorkshop) {
+	editWorkshop = (editingWorkshop) => {
 		this.setState({
 			editingWorkshop,
 		});
+		console.log(editingWorkshop)
 	}
 
 	render() {
