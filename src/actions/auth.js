@@ -22,7 +22,7 @@ export const loginOrRegisterUser = (endpoint, user) => dispatch => {
     return fetch(BASE_URL + endpoint, {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'Content-Type': 'application/json'
             },
         body: JSON.stringify(user)
     })
