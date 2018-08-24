@@ -14,7 +14,6 @@ class Workshops extends Component {
 		this.setState({
 			editingWorkshop,
 		});
-		console.log(editingWorkshop)
 	}
 
 	render() {

@@ -37,15 +37,44 @@ const styles = theme => ({
 
 class WorkshopForm extends Component {
 
+	constructor(props) {
+		super(props);
+		const { editingWorkshop } = this.props;
+
+		if (editingWorkshop?Object.keys(editingWorkshop).length > 0:false) {
+			this.state = {
+				noChangeInStudents: true,
+				students: [ ...editingWorkshop.students ]
+			}
+		} else {
+			this.state = {
+				noChangeInStudents: true,
+				students: []
+			}			
+		}
+	}
+
 	onSubmit = (values) => {
-		const { editingWorkshop, dispatch } = this.props;
+		const { dispatch, editingWorkshop } = this.props;
+		const { students } = this.state;
+
+		this.setState({ noChangeInStudents: true });
+
 		if (editingWorkshop?Object.keys(editingWorkshop).length === 0:false) {
-			dispatch(createWorkshop({ ...values }));
+			dispatch(createWorkshop({ ...values, students }));
 		} else {
 			const { _id } = editingWorkshop;
-			const updatedWorkshop = { _id, ...values };
+			const updatedWorkshop = { _id, ...values, students };
 			dispatch(updateWorkshop(updatedWorkshop));
 		}
+	}
+
+	onUpdateStudents = (updatedStudents) => {
+		this.setState({
+			noChangeInStudents: false,
+			students: updatedStudents,
+		});
+
 	}
 
 	onCancel = (event) => {
@@ -126,14 +155,16 @@ class WorkshopForm extends Component {
 								/>
 							</Grid>
 							<Grid item xs={12}>
-								<WorkshopStudentList students={ editingWorkshop.students } />
+								<WorkshopStudentList
+									students={ this.state.students }
+									onUpdateStudents={ this.onUpdateStudents } />
 							</Grid>
 							<Grid item xs={12}>
 								<Button
 									className={ classes.button }
 									type="submit"
 									color="primary"
-									disabled={ pristine || submitting || !valid }
+									disabled={ (pristine && this.state.noChangeInStudents) || submitting || !valid }
 								>
 									Save
 								</Button>

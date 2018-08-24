@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
@@ -17,7 +19,6 @@ const styles = theme => ({
 class WorkshopStudentList extends Component {
 	state = {
 		openSelectStudentDialog: false,
-		newStudentList: this.props.students,
 	}
 
 	handleClose = () => {
@@ -29,40 +30,60 @@ class WorkshopStudentList extends Component {
 	}
 
 	handleAddStudent = (student) => {
-		this.setState({
-			openSelectStudentDialog: false,
-			newStudentList: [...this.state.newStudentList, student],
-		}, () => console.log(this.state));
+		this.setState({ openSelectStudentDialog: false });
+		this.props.onUpdateStudents([ ...this.props.students, student ]);
 	}
 
 	render() {
-		const { classes } = this.props;
+		const { classes, students, listOfAvailableStudentsToAdd } = this.props;
 		const { openSelectStudentDialog } = this.state;
+
+		const studentChips = students.map((student, index) => (
+			<Chip
+				key={ index }
+				label={ `${student.firstName} ${student.lastName}` }
+				onDelete={ this.handleClose }
+			/>
+		));
 
 		return (
 			<div className={ classes.root } >
-				<Chip
-					label="Jason Trip"
-					onDelete={ this.handleClose }
-				/>
+				{ studentChips }
 				<Button
 					variant="fab"
 					mini
 					color="secondary"
 					className={ classes.button }
 					onClick={ this.handleLookupStudent }
+					disabled={ listOfAvailableStudentsToAdd.length === 0 }
 				>
 					<AddIcon />
 				</Button>
 				<SelectStudentDialog
 					open={ openSelectStudentDialog }
 					onClose={ this.handleClose }
-					onAddStudent={ this.handleAddStudent } 
+					handleAddStudent={ this.handleAddStudent }
+					listOfAvailableStudentsToAdd={ listOfAvailableStudentsToAdd }
 				/>
 			</div>
 		)
 	}
-
 }
 
-export default withStyles(styles)(WorkshopStudentList);
+const mapStateToProps = (state, props) => {
+	const { students } = props;
+	const listOfAvailableStudentsToAdd = state.user.students.slice(0);
+
+	students.forEach(student =>
+		listOfAvailableStudentsToAdd.splice(
+			listOfAvailableStudentsToAdd.findIndex(s => s._id === student._id), 1));
+
+	return ({
+		listOfAvailableStudentsToAdd
+	})
+};
+
+export default compose(
+	connect(mapStateToProps),
+	withStyles(styles)
+)(WorkshopStudentList);
