@@ -60,12 +60,14 @@ class WorkshopForm extends Component {
 
 		this.setState({ noChangeInStudents: true });
 
+		console.log(values);
+
 		if (editingWorkshop?Object.keys(editingWorkshop).length === 0:false) {
-			dispatch(createWorkshop({ ...values, students }));
+			return dispatch(createWorkshop({ ...values, students }));
 		} else {
 			const { _id } = editingWorkshop;
 			const updatedWorkshop = { _id, ...values, students };
-			dispatch(updateWorkshop(updatedWorkshop));
+			return dispatch(updateWorkshop(updatedWorkshop));
 		}
 	}
 

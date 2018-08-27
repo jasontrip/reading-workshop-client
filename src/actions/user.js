@@ -1,4 +1,5 @@
 import { BASE_URL } from '../config';
+import { SubmissionError } from 'redux-form';
 import { loadAuthToken } from '../localStorage';
 import { loading } from './ui';
 
@@ -80,10 +81,16 @@ export const updateStudent = student => dispatch => {
 			}
 			return res.json();
 		})
-		.then((student) => {
+		.then((res) => {
+			if (res.code) {
+				throw res;
+			}
 			dispatch(updateStudentSuccess(student));
-			dispatch(loading(false));
 		})
+		.catch((err) => {
+			throw new SubmissionError(err);
+		})
+		.finally(() => dispatch(loading(false)));
 };
 
 export const UPDATE_STUDENT_SUCCESS = 'UPDATE_STUDENT_SUCCESS';
@@ -110,10 +117,16 @@ export const createStudent = student => dispatch => {
 			}
 			return res.json();
 		})
-		.then((student) => {
-			dispatch(createStudentSuccess(student));
-			dispatch(loading(false));
+		.then((res) => {
+			if (res.code) {
+				throw res;
+			}
+			dispatch(createStudentSuccess(res));
 		})
+		.catch((err) => {
+			throw new SubmissionError(err);
+		})
+		.finally(() => dispatch(loading(false)));
 };
 
 export const CREATE_STUDENT_SUCCESS = 'CREATE_STUDENT_SUCCESS';
@@ -168,10 +181,16 @@ export const updateWorkshop = workshop => dispatch => {
 			}
 			return res.json();
 		})
-		.then((workshop) => {
+		.then((res) => {
+			if(res.code) {
+				throw res;
+			}
 			dispatch(updateWorkshopSuccess(workshop));
-			dispatch(loading(false));
 		})
+		.catch((err) => {
+			throw new SubmissionError(err);
+		})
+		.finally(() => dispatch(loading(false)));
 };
 
 export const UPDATE_WORKSHOP_SUCCESS = 'UPDATE_WORKSHOP_SUCCESS';
@@ -203,10 +222,16 @@ export const createWorkshop = workshop => dispatch => {
 			}
 			return res.json();
 		})
-		.then((workshop) => {
-			dispatch(createWorkshopSuccess(workshop));
-			dispatch(loading(false));
+		.then((res) => {
+			if (res.code) {
+				throw res;
+			}
+			dispatch(createWorkshopSuccess(res));
 		})
+		.catch((err) => {
+			throw new SubmissionError(err)
+		})
+		.finally(() => dispatch(loading(false)))
 };
 
 export const CREATE_WORKSHOP_SUCCESS = 'CREATE_WORKSHOP_SUCCESS';
