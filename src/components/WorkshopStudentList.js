@@ -25,6 +25,10 @@ class WorkshopStudentList extends Component {
 		this.setState({ openSelectStudentDialog: false });
 	}
 
+	handleRemoveStudent = (_id) => {
+		this.props.onUpdateStudents(this.props.students.filter(s => s._id !== _id));
+	}
+
 	handleLookupStudent = () => {
 		this.setState({ openSelectStudentDialog: true });
 	}
@@ -42,7 +46,7 @@ class WorkshopStudentList extends Component {
 			<Chip
 				key={ index }
 				label={ `${student.firstName} ${student.lastName}` }
-				onDelete={ this.handleClose }
+				onDelete={ () => this.handleRemoveStudent(student._id) }
 			/>
 		));
 
