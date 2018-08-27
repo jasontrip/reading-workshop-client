@@ -43,7 +43,7 @@ export default () => Component => {
 
 	const mapStateToProps = (state, props) => ({
 		loading: state.ui.loading,
-		loggedIn: state.user !== null
+		loggedIn: state.user.workshops !== null,
 	});
 
 	return compose(

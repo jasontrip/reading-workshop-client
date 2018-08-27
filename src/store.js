@@ -21,6 +21,7 @@ const store = createStore(
 
 const authToken = loadAuthToken();
 if (authToken) {
+	console.log(authToken)
   store.dispatch(refreshAuthToken(authToken));
   store.dispatch(fetchUserData());
 }

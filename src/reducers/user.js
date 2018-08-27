@@ -10,7 +10,11 @@ import { ADD_STUDENT,
 				 DELETE_WORKSHOP_SUCCESS,
 				} from '../actions/user';
 
-const initialState = null;
+const initialState = {
+	students: [],
+	workshops: null,
+	user: false,
+};
 
 export const userReducer = (state=initialState, action) => {
 	if (action.type === ADD_STUDENT) {
