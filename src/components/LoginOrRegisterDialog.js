@@ -26,8 +26,8 @@ TabContainer.propTypes = {
 
 const styles = {
   dialog: {
-    height: "400px",
-    width: "400px",
+    height: "350px",
+    width: "350px",
   },
 };
 

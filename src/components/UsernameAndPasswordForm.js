@@ -1,9 +1,6 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
-import './UsernameAndPasswordForm.css';
-
 import Button from '@material-ui/core/Button';
-
 import TextField from './TextField';
 
 export function UsernameAndPasswordForm(props) {
@@ -15,6 +12,9 @@ export function UsernameAndPasswordForm(props) {
 		return props.onSubmit(username, password);
 	}
 
+	const textWidth = {
+		width: '300px',
+	}
 
 	return (
 		<form
@@ -23,17 +23,17 @@ export function UsernameAndPasswordForm(props) {
 		>
 			<div>
 				<Field
-					className="username"
+					style={ textWidth }
 					name="username"
 					label="email"
-					component={TextField}
+					component={ TextField }
 					validate={ props.validateUsername }
 					disabled={ submitting }
 				/>
 			</div>
 			<div>
 				<Field
-					className="password"
+					style={ textWidth }
 					name="password"
 					label="password"
 					type="text"
@@ -45,7 +45,7 @@ export function UsernameAndPasswordForm(props) {
 			<br />
 			<div>
 				<Button
-					className="button"
+					style={ textWidth }
 					type="submit"
 					variant="raised"
 					disabled={ pristine || submitting || !valid } >
