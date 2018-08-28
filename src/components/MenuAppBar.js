@@ -97,10 +97,12 @@ class MenuAppBar extends React.Component {
               className={classes.flex}>
               {this.props.pageTitle}
             </Typography>
-            {!user && (
-              <Button color="inherit" onClick={this.logIn}>Login</Button>
+            {!user.loggedIn && (
+              <Button color="inherit" onClick={this.logIn}>
+                Login | Register
+              </Button>
             )}
-            {user && (
+            {user.loggedIn && (
               <div>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}

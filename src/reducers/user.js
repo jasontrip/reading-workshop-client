@@ -13,7 +13,7 @@ import { ADD_STUDENT,
 const initialState = {
 	students: [],
 	workshops: null,
-	user: false,
+	loggedIn: false,
 };
 
 export const userReducer = (state=initialState, action) => {
@@ -32,9 +32,9 @@ export const userReducer = (state=initialState, action) => {
 				.filter(student => student._id !== action.id)
 		});
 	} else if (action.type === SET_USER_DATA) {
-		return Object.assign({}, state, { ...action.user });
+		return Object.assign({}, state, { ...action.user, loggedIn: true });
 	} else if (action.type === CLEAR_USER_DATA) {
-		return null;
+		return initialState;
 	} else if (action.type === CREATE_STUDENT_SUCCESS) {
 		return Object.assign({}, state, {
 			students: [ ...state.students, action.student ]

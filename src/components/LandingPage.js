@@ -1,21 +1,34 @@
 import React from 'react';
 import MenuAppBar from './MenuAppBar'
-import './LandingPage.css';
+import BackgroundImagePath from '../images/library.jpg';
+
+const landingHeader = {
+	padding: '60px 10px 40px 10px',
+	height: '450px',
+	backgroundImage: `url(${BackgroundImagePath}`,
+	color: 'white'
+}
+
+const	section = {
+  minHeight: '200px',
+  padding: '30px 15px',
+  backgroundColor: '#bbb',
+}
 
 export default function LandingPage(props) {
 	return (
 		<div>
 			<MenuAppBar pageTitle="Readers Workshop" />
-			<header>
-				<h1 className="landing-header">Readers Workshop</h1>
+			<header style={landingHeader}>
+				<h1 >Readers Workshop</h1>
 			</header>
-			<section className="section">
+			<section style={section}>
 				<p>
 					You read with small groups of learners every day, 
 					but recording that information is hard! Readers Workshop will help!
 				</p>
 			</section>
-			<section className="section">
+			<section style={section}>
 				[screenshot here]
 				<p>
 					Create a workshop session and record session notes, 
@@ -24,13 +37,13 @@ export default function LandingPage(props) {
 					and take notes for each student.
 				</p>
 			</section>
-			<section className="section">
+			<section style={section}>
 				[screenshot here]
 				<p>
 					Easily add and remove students from your roster.
 				</p>
 			</section>
-			<section className="section">
+			<section style={section}>
 				Create an account and start reading!
 			</section>
 		</div>
