@@ -1,7 +1,4 @@
 import React from 'react';
-
-import {Link} from 'react-router-dom';
-
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
@@ -12,15 +9,13 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
-import Drawer from '@material-ui/core/Drawer';
+
 
 import LoginOrRegisterDialog from './LoginOrRegisterDialog';
+import LeftDrawer from './LeftDrawer';
 
 import { clearAuthToken } from '../localStorage';
 import { clearUserData } from '../actions/user';
@@ -37,14 +32,6 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
-  drawer: {
-    width: '300px',
-    a: {
-      textDecoration: 'none',
-      color: 'none',
-    },
-  },
-
 };
 
 class MenuAppBar extends React.Component {
@@ -88,27 +75,10 @@ class MenuAppBar extends React.Component {
 
     return (
       <div className={classes.root}>
-
-        <Drawer open={this.state.drawerOpen} 
-          onClick={this.toggleDrawer(false)}>
-          <div className={classes.drawer} onClick={this.toggleDrawer(false)}>
-            <List>
-              <ListItem button
-                component={Link}
-                to="/Workshops"
-              >
-                <ListItemText primary="Workshops" />
-              </ListItem>
-              <ListItem button
-                component={Link}
-                to="/Roster"
-              >
-                <ListItemText primary="Roster" />
-              </ListItem>
-            </List>
-          </div>
-        </Drawer>
-
+        <LeftDrawer
+          open={this.state.drawerOpen}
+          onClick={this.toggleDrawer(false)}
+        />
         <LoginOrRegisterDialog
           open={showLoginOrRegisterDialog}
           onClose={this.handleCloseLoginOrRegisterDialog}
