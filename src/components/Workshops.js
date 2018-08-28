@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MenuAppBar from './MenuAppBar';
+import TopAppBar from './TopAppBar';
 import requiresLogin from './requiresLogin';
 import WorkshopList from './WorkshopList';
 import WorkshopForm from './WorkshopForm';
@@ -21,7 +21,7 @@ class Workshops extends Component {
 
 		return (
 			<div>
-				<MenuAppBar pageTitle="Workshops" />
+				<TopAppBar pageTitle="Workshops" />
 				{
 					editingWorkshop
 					?(<WorkshopForm

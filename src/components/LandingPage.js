@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuAppBar from './MenuAppBar'
+import TopAppBar from './TopAppBar'
 import BackgroundImagePath from '../images/library.jpg';
 
 const landingHeader = {
@@ -18,7 +18,7 @@ const	section = {
 export default function LandingPage(props) {
 	return (
 		<div>
-			<MenuAppBar pageTitle="Readers Workshop" />
+			<TopAppBar pageTitle="Readers Workshop" />
 			<header style={landingHeader}>
 				<h1 >Readers Workshop</h1>
 			</header>

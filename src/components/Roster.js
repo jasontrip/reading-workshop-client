@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import compose from 'recompose/compose';
 import requiresLogin from './requiresLogin';
-import MenuAppBar from './MenuAppBar';
+import TopAppBar from './TopAppBar';
 import RosterList from './RosterList';
 import StudentForm from './StudentForm';
 
@@ -25,7 +25,7 @@ export class Roster extends Component {
 
 		return (
 			<div>
-				<MenuAppBar pageTitle="Roster" />
+				<TopAppBar pageTitle="Roster" />
 				{ 
 					editingStudent
 					?(<StudentForm
