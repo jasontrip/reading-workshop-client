@@ -96,7 +96,7 @@ class WorkshopForm extends Component {
 				<div className={classes.formGrid}>
 					<form onSubmit={ handleSubmit(this.onSubmit) }>
 						<Grid container justify="center" direction="row" spacing={24}>
-							<Grid item xs={4}>
+							<Grid item xs={5}>
 								<Field
 									name="date"
 									label="date"
@@ -113,7 +113,7 @@ class WorkshopForm extends Component {
 									validate={ [required, nonEmpty] }
 								/>
 							</Grid>
-							<Grid item xs={6}>
+							<Grid item xs={5}>
 								<Field
 									name="book"
 									label="book"
