@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { List, ListItem, ListItemText, Divider } from '@material-ui/core/';
+import { List, ListItem, ListItemText } from '@material-ui/core/';
 import { Face as FaceIcon } from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
 import { Add as AddIcon } from '@material-ui/icons';
@@ -25,6 +25,7 @@ export function RosterList(props) {
 		<div key={index}>
 			<ListItem
 				button
+				divider
 				onClick={ () => onClick(student) }
 			>
 				<FaceIcon />
@@ -32,7 +33,6 @@ export function RosterList(props) {
 					primary={`${student.firstName} ${student.lastName}`}
 				/>
 			</ListItem>
-			<Divider />
 		</div>
 	));
 

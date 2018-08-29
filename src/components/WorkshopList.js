@@ -7,7 +7,6 @@ import moment from 'moment';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -36,6 +35,7 @@ export function WorkshopList(props) {
 			<div key={index}>
 				<ListItem
 					button
+					divider
 					onClick={ () => editWorkshop(workshop) }
 				>
 					<ListItemText
@@ -43,7 +43,6 @@ export function WorkshopList(props) {
 						secondary={studentList}
 					/>
 				</ListItem>
-				<Divider />
 			</div>
 		)
 	});
