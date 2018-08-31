@@ -16,7 +16,7 @@ const styles = theme => ({
   },
 });
 
-class WorkshopStudentList extends Component {
+export class WorkshopStudentList extends Component {
 	state = {
 		openSelectStudentDialog: false,
 	}

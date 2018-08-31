@@ -35,7 +35,7 @@ const styles = theme => ({
 	},
 });
 
-class WorkshopForm extends Component {
+export class WorkshopForm extends Component {
 
 	constructor(props) {
 		super(props);

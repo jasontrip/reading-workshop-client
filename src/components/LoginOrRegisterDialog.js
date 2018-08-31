@@ -31,7 +31,7 @@ const styles = {
   },
 };
 
-class LoginOrRegisterDialog extends React.Component {
+export class LoginOrRegisterDialog extends React.Component {
   state = {
     tab: 0,
   };
@@ -102,7 +102,4 @@ LoginOrRegisterDialog.propTypes = {
   selectedValue: PropTypes.string,
 };
 
-const mapStateToProps = state => ({
-});
-
-export default connect(mapStateToProps)(withStyles(styles)(LoginOrRegisterDialog));
+export default connect()(withStyles(styles)(LoginOrRegisterDialog));

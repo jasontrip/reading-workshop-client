@@ -2,7 +2,7 @@ import React from 'react';
 
 import TextField from '@material-ui/core/TextField';
 
-export default function WrappedTextField(props) {
+export function WrappedTextField(props) {
 	const {label, meta: {touched, error, warning}, input, ...custom} = props;
 
 	const helperText = error && touched?error:(warning && touched?warning:'');
@@ -16,3 +16,5 @@ export default function WrappedTextField(props) {
 			{...custom} />
 	)
 }
+
+export default WrappedTextField;

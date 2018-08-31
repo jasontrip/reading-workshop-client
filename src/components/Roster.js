@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import compose from 'recompose/compose';
-import requiresLogin from './requiresLogin';
+import RequiresLogin from './RequiresLogin';
 import TopAppBar from './TopAppBar';
 import RosterList from './RosterList';
 import StudentForm from './StudentForm';
@@ -49,6 +49,6 @@ const mapStateToProps = state => ({
 });
 
 export default compose(
-	requiresLogin(),
+	RequiresLogin(),
 	connect(mapStateToProps)
 ) (Roster);

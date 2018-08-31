@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import { Face as FaceIcon } from '@material-ui/icons';
 import ListItemText from '@material-ui/core/ListItemText';
 
-export function LookupStudentsDialog(props) {
+export function SelectStudentDialog(props) {
 	const { listOfAvailableStudentsToAdd, open, onClose, handleAddStudent } = props;
 
 	const listOfAvailableStudentsToAddItems = listOfAvailableStudentsToAdd.map((student, index) => (
@@ -34,4 +34,4 @@ export function LookupStudentsDialog(props) {
 
 
 
-export default LookupStudentsDialog;
+export default SelectStudentDialog;

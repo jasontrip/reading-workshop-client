@@ -22,7 +22,7 @@ const styles = {
   },
 };
 
-class TopAppBar extends React.Component {
+export class TopAppBar extends React.Component {
   state = {
     drawerOpen: false,
   };

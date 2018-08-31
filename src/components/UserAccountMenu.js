@@ -7,7 +7,7 @@ import { clearAuthToken } from '../localStorage';
 import { clearUserData } from '../actions/user';
 import { toggleLoginOrRegisterDialogOpen } from '../actions/ui';
 
-class UserAccountMenu extends React.Component {
+export class UserAccountMenu extends React.Component {
 	state={
 		anchorEl: null,
 	}

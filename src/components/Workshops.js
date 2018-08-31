@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import TopAppBar from './TopAppBar';
-import requiresLogin from './requiresLogin';
+import RequiresLogin from './RequiresLogin';
 import WorkshopList from './WorkshopList';
 import WorkshopForm from './WorkshopForm';
 
-class Workshops extends Component {
+export class Workshops extends Component {
 
 	state = {
 		editingWorkshop: null
@@ -42,4 +42,4 @@ class Workshops extends Component {
 
 }
 
-export default requiresLogin()(Workshops);
+export default RequiresLogin()(Workshops);

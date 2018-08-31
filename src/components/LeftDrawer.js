@@ -19,7 +19,7 @@ const styles = {
   },
 }
 
-class MenuAppBar extends React.Component {
+export class LeftDrawer extends React.Component {
 
 	render() {
 		const { classes } = this.props;
@@ -59,4 +59,4 @@ class MenuAppBar extends React.Component {
 
 }
 
-export default withStyles(styles)(MenuAppBar);
+export default withStyles(styles)(LeftDrawer);
