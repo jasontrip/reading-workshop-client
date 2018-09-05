@@ -35,7 +35,7 @@ const styles = {
 
 export class LoginOrRegisterDialog extends React.Component {
   static defaultProps = {
-    error: false,
+    error: '',
     onClose: null,
     selectedValue: null,
   };
@@ -113,7 +113,7 @@ export class LoginOrRegisterDialog extends React.Component {
 
 LoginOrRegisterDialog.propTypes = {
   open: PropTypes.bool.isRequired,
-  error: PropTypes.bool,
+  error: PropTypes.string,
   classes: PropTypes.object.isRequired,
   onClose: PropTypes.func,
   selectedValue: PropTypes.string,
