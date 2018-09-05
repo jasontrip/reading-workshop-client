@@ -19,15 +19,22 @@ describe('<LeftDrawer />', () => {
 	  },
 	}
 
+	const callback = jest.fn();
+
+	const props = {
+		open: false,
+		onClick: callback,
+	};
+
 	it('Shallow renders a Drawer, with a List and at least two ListItems', () => {
-    const wrapper = shallow(<LeftDrawer classes={styles} />);
+    const wrapper = shallow(<LeftDrawer classes={styles} {...props}/>);
     expect(wrapper.find(Drawer).length).toEqual(1);
     expect(wrapper.find(Button).length).toEqual(1);
     expect(wrapper.find(ListItem).length).toBeGreaterThan(1);
   });
 
   it('Renders one List and more than one ListItems', () => {
-    const wrapper = shallow(<LeftDrawer classes={styles} />);
+    const wrapper = shallow(<LeftDrawer classes={styles} {...props}/>);
     expect(wrapper.find(List).length).toEqual(1);
     expect(wrapper.find(ListItem).length).toBeGreaterThan(1);
   });

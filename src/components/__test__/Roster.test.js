@@ -10,8 +10,7 @@ describe('<Roster />', () => {
 
 
 	const props = {
-		students: {
-		}
+		students: [],
 	}
 
 	it('Shallow renders and in initial state it renders the RosterList', () => {

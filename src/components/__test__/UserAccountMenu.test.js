@@ -7,7 +7,8 @@ describe('<UserAccountMenu />', () => {
   const props = {
     loggedIn: true,
     showLoginOrRegisterDialog: true,
-  }
+    dispatch: jest.fn(),
+  };
 
   it('Shallow renders', () => {
     const wrapper = shallow(<UserAccountMenu { ...props } />);

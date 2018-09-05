@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
+import {
+  AppBar, Toolbar, IconButton, Typography,
+} from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 import UserAccountMenu from './UserAccountMenu';
 import LeftDrawer from './LeftDrawer';
-
-
 
 const styles = {
   root: {
@@ -23,37 +23,41 @@ const styles = {
 };
 
 export class TopAppBar extends React.Component {
+  static defaultProps = {
+    pageTitle: '',
+  }
+
   state = {
     drawerOpen: false,
   };
 
-  toggleDrawer = (drawerOpen) => () => {
-    this.setState ({
-      drawerOpen
-    });
-  }
+  toggleDrawer = drawerOpen => () => this.setState({ drawerOpen });
 
   render() {
-    const { classes } = this.props;
+    const { classes, pageTitle } = this.props;
+    const { drawerOpen } = this.state;
 
     return (
       <div className={classes.root}>
         <LeftDrawer
-          open={this.state.drawerOpen}
+          open={drawerOpen}
           onClick={this.toggleDrawer(false)}
         />
         <AppBar position="static">
           <Toolbar>
             <IconButton
               className={classes.menuButton}
-              color="inherit" aria-label="Menu">
+              color="inherit"
+              aria-label="Menu"
+            >
               <MenuIcon onClick={this.toggleDrawer(true)} />
             </IconButton>
             <Typography
-              variant="title" 
+              variant="title"
               color="inherit"
-              className={classes.flex}>
-              {this.props.pageTitle}
+              className={classes.flex}
+            >
+              {pageTitle}
             </Typography>
             <UserAccountMenu />
           </Toolbar>
@@ -65,6 +69,7 @@ export class TopAppBar extends React.Component {
 
 TopAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
+  pageTitle: PropTypes.string,
 };
 
 export default compose(

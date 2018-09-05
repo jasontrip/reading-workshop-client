@@ -12,17 +12,17 @@ describe('<WorkshopList />', () => {
       right: '',
     },
   };
-  
+
   const callback = jest.fn();
 
   const props = {
     editWorkshop: callback,
     classes: styles,
     workshops: [],
-  }
+  };
 
   it('Shallow renders', () => {
-    const wrapper = shallow(<WorkshopList { ...props } />);
+    const wrapper = shallow(<WorkshopList {...props} />);
   });
 
 });

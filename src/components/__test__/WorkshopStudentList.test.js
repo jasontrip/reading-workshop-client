@@ -12,14 +12,15 @@ describe('<WorkshopStudentList />', () => {
       margin: '',
     },
   };
-  
+
   const callback = jest.fn();
 
   const props = {
     classes: styles,
     students: [],
     listOfAvailableStudentsToAdd: [],
-  }
+    onUpdateStudents: callback,
+  };
 
   it('Shallow renders', () => {
     const wrapper = shallow(<WorkshopStudentList { ...props } />);
