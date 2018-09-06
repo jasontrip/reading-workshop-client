@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -18,7 +17,7 @@ export default () => (Component) => {
 
   function RequiresLogin(props) {
     const {
-      loading, loggedIn, classes, ...passThroughProps
+      loading, classes, ...passThroughProps
     } = props;
 
     if (loading) {
@@ -35,16 +34,11 @@ export default () => (Component) => {
       );
     }
 
-    if (!loggedIn) {
-      return <Redirect to="/" />;
-    }
-
     return <Component {...passThroughProps} />;
   }
 
   const mapStateToProps = state => ({
     loading: state.ui.loading,
-    loggedIn: state.user.workshops !== null,
   });
 
   return compose(
