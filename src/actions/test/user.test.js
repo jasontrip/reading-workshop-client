@@ -9,7 +9,10 @@ import {
   UPDATE_WORKSHOP_SUCCESS, updateWorkshopSuccess,
   CREATE_WORKSHOP_SUCCESS, createWorkshopSuccess,
   DELETE_WORKSHOP_SUCCESS, deleteWorkshopSuccess,
+  fetchUserData,
 } from '../user';
+import { loading } from '../ui';
+import { BASE_URL } from '../../config';
 
 describe('setUserData', () => {
   it('Should return the action', () => {
@@ -96,5 +99,39 @@ describe('deleteWorkshopSuccess', () => {
     const action = deleteWorkshopSuccess(_id);
     expect(action._id).toEqual(_id);
     expect(action.type).toEqual(DELETE_WORKSHOP_SUCCESS);
+  });
+});
+
+describe('fetchUserData', () => {
+  it('Should dispatch setUserData, userDataSuccess and loading', () => {
+    const user = { username: 'test' };
+    const authToken = '';
+
+    global.localStorage = jest.fn(() => {});
+    localStorage.getItem = jest.fn(() => authToken);
+
+    const mockRes = {
+      ok: true,
+      json() {
+        return user;
+      },
+    };
+
+    global.fetch = jest.fn(() => Promise.resolve(mockRes));
+
+    const dispatch = jest.fn();
+
+    return fetchUserData()(dispatch)
+      .then(() => {
+        expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/users`, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
+        expect(dispatch).toHaveBeenCalledWith(setUserData(user));
+        expect(dispatch).toHaveBeenCalledWith(userDataSuccess());
+        expect(dispatch).toHaveBeenCalledWith(loading(false));
+      });
   });
 });
