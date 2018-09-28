@@ -5,7 +5,9 @@ import { Typography } from '@material-ui/core';
 
 const styles = {
   root: {
-    maxWidth: '500px',
+    maxWidth: '400px',
+    minWidth: '100px',
+    width: '75%',
     margin: '75px auto 75px auto',
   },
   image: {

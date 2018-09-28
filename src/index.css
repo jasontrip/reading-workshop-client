@@ -9,8 +9,21 @@ body {
 	color: #444;
 	line-height: 1.5;
 	margin: 0px;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	-o-font-smoothing: antialiased;
 }
 
 h1 {
 	text-align: center;
+	font-size: 3em;
+	text-shadow: 1px 1px 75px black;
+}
+
+a {
+	color: inherit;
+}
+
+a:visited {
+	color: inherit;
 }

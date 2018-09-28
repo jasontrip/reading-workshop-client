@@ -32,8 +32,8 @@ export class LeftDrawer extends React.Component {
         <div className={classes.drawer}>
           <div className={classes.title}>
             <Button component={Link} to="/">
-              <Typography variant="headline">
-                Reading Workshop
+              <Typography variant="title">
+                Readers Workshop
               </Typography>
             </Button>
           </div>

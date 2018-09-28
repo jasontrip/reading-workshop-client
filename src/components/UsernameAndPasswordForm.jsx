@@ -17,7 +17,8 @@ export function UsernameAndPasswordForm(props) {
   };
 
   const textWidth = {
-    width: '300px',
+    maxWidth: '300px',
+    width: '95%',
   };
 
   return (

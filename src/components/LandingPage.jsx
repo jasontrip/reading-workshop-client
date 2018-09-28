@@ -13,6 +13,13 @@ const landingHeader = {
   color: 'white',
 };
 
+const footer = {
+  backgroundColor: '#333333',
+  color: '#FFFFFF',
+  textAlign: 'right',
+  padding: '40px 20px 40px 0',
+};
+
 export default function LandingPage() {
   return (
     <div>
@@ -36,6 +43,15 @@ export default function LandingPage() {
         alt="Roster Screenshot"
         text="Add and remove students from your roster."
       />
+      <footer style={footer}>
+        <div>Built with ReactJs and MaterialUI.</div>
+        <div>
+          <span>See the code! </span>
+          <a href="https://github.com/jasontrip/reading-workshop-client">client</a> - 
+          <a href="https://github.com/jasontrip/reading-workshop-server">server</a>
+        </div>
+
+      </footer>
     </div>
   );
 }
