@@ -34,6 +34,7 @@ export function UsernameAndPasswordForm(props) {
           validate={validateUsername}
           disabled={submitting}
         />
+        demo: test@gmail.com
       </div>
       <div>
         <Field
@@ -45,6 +46,7 @@ export function UsernameAndPasswordForm(props) {
           validate={validatePassword}
           disabled={submitting}
         />
+        demo: asdfasdfasdf
       </div>
       <br />
       <div>
