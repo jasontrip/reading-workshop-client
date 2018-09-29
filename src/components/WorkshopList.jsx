@@ -9,6 +9,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { toggleLoginOrRegisterDialogOpen } from '../actions/ui';
 
 const styles = theme => ({
   button: {
@@ -20,7 +21,7 @@ const styles = theme => ({
 });
 
 export function WorkshopList(props) {
-  const { workshops, editWorkshop, classes } = props;
+  const { workshops, editWorkshop, classes, loggedIn, dispatch } = props;
 
   const workshopList = workshops.map((workshop, index) => {
     const workshopDate = moment(workshop.date).format('MMM Do');
@@ -41,17 +42,27 @@ export function WorkshopList(props) {
           />
         </ListItem>
       </div>
-    )
+    );
   });
+
+  if (!loggedIn) {
+    dispatch(toggleLoginOrRegisterDialogOpen(true));
+  }
 
   return (
     <div>
       <List>
         {workshopList}
       </List>
-      <Button variant="fab" color="secondary" aria-label="Add" className={classes.button}>
-        <AddIcon onClick={() => editWorkshop({})} />
-      </Button>
+      {loggedIn
+        ? (
+          <Button variant="fab" color="secondary" aria-label="Add" className={classes.button}>
+            <AddIcon onClick={() => editWorkshop({})} />
+          </Button>
+        )
+        : ""
+      }
+
     </div>
   );
 }
@@ -64,6 +75,7 @@ WorkshopList.propTypes = {
 
 const mapStateToProps = state => ({
   workshops: state.user.workshops,
+  loggedIn: state.user.loggedIn,
 });
 
 export default compose(

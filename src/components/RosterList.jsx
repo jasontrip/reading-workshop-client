@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { List, ListItem, ListItemText } from '@material-ui/core/';
 import { Face as FaceIcon, Add as AddIcon } from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
+import { toggleLoginOrRegisterDialogOpen } from '../actions/ui';
 
 const styles = theme => ({
   button: {
@@ -15,7 +18,7 @@ const styles = theme => ({
 });
 
 export function RosterList(props) {
-  const { students, classes, editStudent } = props;
+  const { students, classes, editStudent, loggedIn, dispatch } = props;
 
   const onClick = (student) => {
     editStudent(student);
@@ -36,15 +39,28 @@ export function RosterList(props) {
     </div>
   ));
 
+  if (!loggedIn) {
+    dispatch(toggleLoginOrRegisterDialogOpen(true));
+  }
+
   return (
     <div>
       <List>{ studentList }</List>
-      <Button variant="fab" color="secondary" aria-label="Add" className={classes.button}>
-        <AddIcon onClick={() => editStudent({})} />
-      </Button>
+      {(loggedIn
+        ? (
+          <Button variant="fab" color="secondary" aria-label="Add" className={classes.button}>
+            <AddIcon onClick={() => editStudent({})} />
+          </Button>
+        )
+        : ""
+      )}
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  loggedIn: state.user.loggedIn,
+});
 
 RosterList.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -52,4 +68,7 @@ RosterList.propTypes = {
   editStudent: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(RosterList);
+export default compose(
+  connect(mapStateToProps),
+  withStyles(styles),
+)(RosterList);

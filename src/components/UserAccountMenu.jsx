@@ -25,10 +25,11 @@ export class UserAccountMenu extends React.Component {
   handleClose = () => this.setState({ anchorEl: null });
 
   handleLogout = () => {
-    const { dispatch } = this.props;
+    const { dispatch, history } = this.props;
     dispatch(clearUserData());
     this.setState({ anchorEl: null });
     clearAuthToken();
+    history.push('/');
   };
 
   handleCloseLoginOrRegisterDialog = () => {
@@ -37,7 +38,7 @@ export class UserAccountMenu extends React.Component {
   }
 
   render() {
-    const { loggedIn, showLoginOrRegisterDialog } = this.props;
+    const { loggedIn, showLoginOrRegisterDialog, history } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
@@ -46,6 +47,7 @@ export class UserAccountMenu extends React.Component {
         <LoginOrRegisterDialog
           open={showLoginOrRegisterDialog}
           onClose={this.handleCloseLoginOrRegisterDialog}
+          history={history}
         />
         {!loggedIn && (
           <Button color="inherit" onClick={this.logIn}>
@@ -89,6 +91,7 @@ UserAccountMenu.propTypes = {
   dispatch: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
   showLoginOrRegisterDialog: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({

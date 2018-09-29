@@ -34,7 +34,7 @@ export class TopAppBar extends React.Component {
   toggleDrawer = drawerOpen => () => this.setState({ drawerOpen });
 
   render() {
-    const { classes, pageTitle } = this.props;
+    const { classes, pageTitle, history } = this.props;
     const { drawerOpen } = this.state;
 
     return (
@@ -59,7 +59,7 @@ export class TopAppBar extends React.Component {
             >
               {pageTitle}
             </Typography>
-            <UserAccountMenu />
+            <UserAccountMenu history={history} />
           </Toolbar>
         </AppBar>
       </div>

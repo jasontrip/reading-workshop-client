@@ -20,10 +20,11 @@ const footer = {
   padding: '40px 20px 40px 0',
 };
 
-export default function LandingPage() {
+export default function LandingPage(props) {
+  const { history } = props;
   return (
     <div>
-      <TopAppBar pageTitle="Readers Workshop" />
+      <TopAppBar pageTitle="Readers Workshop" history={history}/>
       <header style={landingHeader}>
         <h1>Readers Workshop</h1>
       </header>

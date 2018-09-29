@@ -21,12 +21,12 @@ export class Roster extends Component {
   }
 
   render() {
-    const { students } = this.props;
+    const { students, history } = this.props;
     const { editingStudent } = this.state;
 
     return (
       <div>
-        <TopAppBar pageTitle="Roster" />
+        <TopAppBar pageTitle="Roster" history={history} />
         {
           editingStudent
             ? (<StudentForm

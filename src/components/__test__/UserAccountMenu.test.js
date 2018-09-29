@@ -8,6 +8,7 @@ describe('<UserAccountMenu />', () => {
     loggedIn: true,
     showLoginOrRegisterDialog: true,
     dispatch: jest.fn(),
+    history: {},
   };
 
   it('Shallow renders', () => {

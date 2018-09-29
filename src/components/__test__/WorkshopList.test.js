@@ -19,6 +19,7 @@ describe('<WorkshopList />', () => {
     editWorkshop: callback,
     classes: styles,
     workshops: [],
+    dispatch: callback,
   };
 
   it('Shallow renders', () => {

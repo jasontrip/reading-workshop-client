@@ -17,10 +17,11 @@ export class Workshops extends Component {
 
   render() {
     const { editingWorkshop } = this.state;
+    const { history } = this.props;
 
     return (
       <div>
-        <TopAppBar pageTitle="Workshops" />
+        <TopAppBar pageTitle="Workshops" history={history}/>
         {
           editingWorkshop
             ? (

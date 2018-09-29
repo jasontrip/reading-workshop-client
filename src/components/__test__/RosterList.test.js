@@ -24,6 +24,7 @@ describe('<RosterList />', () => {
 		classes: styles,
 		students: [{ firstName: 'testFirst', lastName: 'testLast'}],
 		editStudent: callback,
+		dispatch: callback,
 	}
 
 	it('Shallow renders', () => {

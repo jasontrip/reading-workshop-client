@@ -14,7 +14,7 @@ export const authSuccess = () => ({
   type: AUTH_SUCCESS,
 });
 
-export const loginOrRegisterUser = (endpoint, user) => (dispatch) => {
+export const loginOrRegisterUser = (endpoint, user, history) => (dispatch) => {
   dispatch(loading(true));
   const ambiguousLoginError = {
     username: 'Username or password incorrect',
@@ -40,6 +40,7 @@ export const loginOrRegisterUser = (endpoint, user) => (dispatch) => {
       dispatch(setUserData(res.user));
       dispatch(toggleLoginOrRegisterDialogOpen(false));
       dispatch(loading(false));
+      history.push('/workshops');
     })
     .catch((err) => {
       throw new SubmissionError(err);

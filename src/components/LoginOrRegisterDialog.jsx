@@ -46,12 +46,12 @@ export class LoginOrRegisterDialog extends React.Component {
 
   logIn = (username, password) => {
     const { dispatch } = this.props;
-    return dispatch(loginOrRegisterUser('/auth/login', { username, password }));
+    return dispatch(loginOrRegisterUser('/auth/login', { username, password }, this.props.history));
   };
 
   register = (username, password) => {
     const { dispatch } = this.props;
-    return dispatch(loginOrRegisterUser('/users', { username, password }));
+    return dispatch(loginOrRegisterUser('/users', { username, password }), this.props.history);
   };
 
   handleChange = (event, value) => {
