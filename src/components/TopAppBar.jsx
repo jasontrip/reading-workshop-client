@@ -31,7 +31,9 @@ export class TopAppBar extends React.Component {
     drawerOpen: false,
   };
 
-  toggleDrawer = drawerOpen => () => this.setState({ drawerOpen });
+  toggleDrawer(drawerOpen) {
+    this.setState({ drawerOpen });
+  }
 
   render() {
     const { classes, pageTitle, history } = this.props;
@@ -41,7 +43,7 @@ export class TopAppBar extends React.Component {
       <div className={classes.root}>
         <LeftDrawer
           open={drawerOpen}
-          onClick={this.toggleDrawer(false)}
+          onClick={() => this.toggleDrawer(false)}
         />
         <AppBar position="static">
           <Toolbar>
@@ -49,8 +51,9 @@ export class TopAppBar extends React.Component {
               className={classes.menuButton}
               color="inherit"
               aria-label="Menu"
+              onClick={() => this.toggleDrawer(true)}
             >
-              <MenuIcon onClick={this.toggleDrawer(true)} />
+              <MenuIcon />
             </IconButton>
             <Typography
               variant="title"
