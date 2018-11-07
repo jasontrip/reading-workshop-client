@@ -1,6 +1,7 @@
 # Readers Workshop Client
-[link to live app](https://reading-workshop-client.netlify.com/)
-[link to server repo](https://github.com/jasontrip/reading-workshop-server)
+-----------------
+[link to live app](https://reading-workshop-client.netlify.com/)  
+[link to server repo](https://github.com/jasontrip/reading-workshop-server)  
 
 ## Summary
 This is the client side app that allows a user to keep track of readers workshop sessions they have hosted and which students from their roster attended which sessions.
