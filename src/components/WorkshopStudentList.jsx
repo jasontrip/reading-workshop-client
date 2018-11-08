@@ -15,6 +15,9 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
+  chip: {
+    marginRight: '7px',
+  },
 });
 
 export class WorkshopStudentList extends Component {
@@ -50,6 +53,7 @@ export class WorkshopStudentList extends Component {
         key={index}
         label={`${student.firstName} ${student.lastName}`}
         onDelete={() => this.handleRemoveStudent(student._id)}
+        className={classes.chip}
       />
     ));
 

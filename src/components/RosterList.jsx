@@ -10,9 +10,9 @@ import { toggleLoginOrRegisterDialogOpen } from '../actions/ui';
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
-    position: 'absolute',
-    bottom: theme.spacing.unit * 2,
+    margin: theme.spacing.unit * 2,
+    float: 'right',
+    bottom: theme.spacing.unit * 6,
     right: theme.spacing.unit * 2,
   },
 });
@@ -48,11 +48,16 @@ export function RosterList(props) {
       <List>{ studentList }</List>
       {(loggedIn
         ? (
-          <Button variant="fab" color="secondary" aria-label="Add" className={classes.button}>
+          <Button
+            variant="fab"
+            color="secondary"
+            aria-label="Add"
+            className={classes.button}
+          >
             <AddIcon onClick={() => editStudent({})} />
           </Button>
         )
-        : ""
+        : ''
       )}
     </div>
   );

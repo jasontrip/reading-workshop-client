@@ -78,7 +78,7 @@ export class UserAccountMenu extends React.Component {
               open={open}
               onClose={this.handleClose}
             >
-              <MenuItem onClick={this.handleLogout}>Log out</MenuItem>
+              <MenuItem onClick={this.handleLogout}>Log Out</MenuItem>
             </Menu>
           </div>
         )}
