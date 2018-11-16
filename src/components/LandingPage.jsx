@@ -24,9 +24,9 @@ export default function LandingPage(props) {
   const { history } = props;
   return (
     <div>
-      <TopAppBar pageTitle="Readers Workshop" history={history}/>
+      <TopAppBar pageTitle="Reading Workshop" history={history}/>
       <header style={landingHeader}>
-        <h1>Readers Workshop</h1>
+        <h1>Reading Workshop</h1>
       </header>
 
       <ScreenshotAndExplanation
