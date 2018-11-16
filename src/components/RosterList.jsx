@@ -11,9 +11,9 @@ import { toggleLoginOrRegisterDialogOpen } from '../actions/ui';
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit * 2,
-    float: 'right',
-    bottom: theme.spacing.unit * 6,
-    right: theme.spacing.unit * 2,
+    position: 'fixed',
+    top: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 9,
   },
 });
 
