@@ -73,6 +73,8 @@ UsernameAndPasswordForm.propTypes = {
   submitting: PropTypes.bool.isRequired,
   valid: PropTypes.bool.isRequired,
   buttonText: PropTypes.string.isRequired,
+  demoUser: PropTypes.string.isRequired,
+  demoPassword: PropTypes.string.isRequired,
 };
 
 export default reduxForm({
