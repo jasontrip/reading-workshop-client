@@ -6,7 +6,7 @@ import TextField from './TextField';
 
 export function UsernameAndPasswordForm(props) {
   const {
-    onSubmit, handleSubmit,
+    onSubmit, handleSubmit, demoUser, demoPassword,
     pristine, submitting, valid, buttonText, validateUsername, validatePassword,
   } = props;
 
@@ -19,6 +19,7 @@ export function UsernameAndPasswordForm(props) {
   const textWidth = {
     maxWidth: '300px',
     width: '95%',
+    marginBottom: '10px',
   };
 
   return (
@@ -34,7 +35,7 @@ export function UsernameAndPasswordForm(props) {
           validate={validateUsername}
           disabled={submitting}
         />
-        demo: test@gmail.com
+        {demoUser ? `demo: ${demoUser}` : ''}
       </div>
       <div>
         <Field
@@ -46,7 +47,7 @@ export function UsernameAndPasswordForm(props) {
           validate={validatePassword}
           disabled={submitting}
         />
-        demo: asdfasdfasdf
+        {demoUser ? `demo: ${demoPassword}` : ''}
       </div>
       <br />
       <div>

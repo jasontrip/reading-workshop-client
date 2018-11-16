@@ -89,6 +89,8 @@ export class LoginOrRegisterDialog extends React.Component {
                   validateUsername={[required, nonEmpty, noWhitespace]}
                   validatePassword={[required, nonEmpty]}
                   onSubmit={this.logIn}
+                  demoUser="test@gmail.com"
+                  demoPassword="asdfasdfasdf"
                 />
               </TabContainer>
             )

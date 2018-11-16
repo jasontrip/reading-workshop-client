@@ -32,4 +32,5 @@ a:visited {
 .App {
 	background-color: white;
 	padding-bottom: 30px;
+	min-width: 200px;
 }
